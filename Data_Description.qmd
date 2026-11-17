@@ -82,3 +82,14 @@ Similarly the theil index database had some columns that were not relevant to ou
 
 ## CEPII BACI : 
 
+### Description of important variables
+
+## WEO
+
+The first important variable from the WEO is the Gross domestic production (GDP) (in Billions of US dollars). It measures the production of a country. It will be the base of our analysis through output we can infer from it.
+The Population (in millions) can help us measure the importance of the number of people while GDP per capita (in Billions of US dollars) the importance of the welfare of the inhabitants.
+The current account balance (in percent of GDP) helps us understand if the country is a lender or a borrower and in which proportion
+The gross debt (in percent of GDP) allows us to understand to what extent a country is indebted.
+The gross national savings (in percent of GDP) represent the part of the GDP that is not consumed.
+Finally the unemployment rate (in percent) measures the part of the population that is unemployed.
+All those variables can either explain the effect of an international shock on an economy.
