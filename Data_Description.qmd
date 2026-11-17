@@ -23,6 +23,13 @@ library(dplyr)
 ### Data Source Description 
 ## WEO-IMF 
 
+Our first data set comes from the International Monetary fund (IMF). It is the World Economic Outlook (WEO) from October 2026.
+The data are calculated using  hypothesis, notably on oil prices and interest rates. 
+Some numerical values change with the evolution of the calculation methods, especially for countries with less qualitative data.
+The FMI uses national accounting , balance of payments statistics and public finances statistics which explains the difference of quality between countries input.
+The frame of reference may change between countries, possibly leading to different method of calculation. 
+Therefore each value shouldn't be considered exact but a order of magnitude.
+
 ## UN Trade and development 
 
 ## CEPII BACI database
