@@ -46,7 +46,39 @@ WEO <- weo |>
 
 `weo` was the original data set that we imported with `vroom`. We then removed the three first columns which corresponded to the data set, the series code and the type of measure since we didn't need them. The clean data set is stored in `WEO.`
 
-| Country           | Indicator       | Frequency | Scale | Year (1995-2025) |
-|-------------------|-----------------|-----------|-------|------------------|
-| Number of rows    | `{r} nrow(WEO)` |           |       |                  |
-| Number of columns | `{r} ncol(WEO)` |           |       |                  |
+| Country | Indicator | Frequency | Scale | Year (1995-2025) |
+|---------|-----------|-----------|-------|------------------|
+|         |           |           |       |                  |
+
+Number of rows : `{r} nrow(WEO)`
+
+Number of columns : `{r} ncol(WEO)`
+
+## UN Trade and development
+
+```{r}
+un_trade_processed <- un_trade |> 
+  select(1:6, `Percentage of total world`)
+```
+
+The original data set Merchandise Trade Annual contained unecssary information for our project so after havinf proceesed the data file we stored it in un_trade_processed The table format is as follows :
+
+| Year | Economy | Economy Label | Flow | Flow Label | Millions of US\$ at current prices | percentage of total world |
+|-----------|-----------|-----------|-----------|-----------|-----------|-----------|
+| Number of rows : | `{r} nrow(un_trade_processed)` |  |  |  |  |  |
+| Number of columns : | `{r} ncol(un_trade_processed)` |  |  |  |  |  |
+
+```{r}
+un_trade_theil_processed <- un_trade_theil|>
+  select(1:8)
+```
+
+Similarly the theil index database had some columns that were not relevant to our project so after processing the database and storing it in un_trade_theil_processed The table format is as follows :
+
+| Year | Economy | Economy Label | Flow | Flow Label | Series | Series label | index |
+|----------|----------|----------|--------|----------|--------|--------|--------|
+| Number of rows : | `{r} nrow(un_trade_theil_processed)` |  |  |  |  |  |  |
+| Number of columns : | `{r} ncol(un_trade_theil_processed)` |  |  |  |  |  |  |
+
+## CEPII BACI : 
+
