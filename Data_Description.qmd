@@ -1,13 +1,7 @@
 ---
 title: "Data_Description"
 author: "Ibrahim khribch and Lucas monnaert"
-format: 
-  revealjs:
-    echo: false
-  pptx:
-    echo: false
-lightbox: true
-df-print: kable
+format: html
 ---
 
 ```{r}
@@ -44,5 +38,16 @@ the values are calculated using UN Comtrade data, and the CEPII reconciles the d
 CEPII is a French research institution specializing in international economics. 
 For our project we use their BACI database which provides annual trade information in an extensive and rigorous way, in fact the BACI provides bilateral data which also specifies the goods being traded. 
 the values are calculated using UN Comtrade data, and the CEPII reconciles the data accounting for the many sources of differences between the reporting countries of the UN, the final data base is presented using HS6 classification.
+
+### Data sets Description table 
+
+```{r}
+#data import 
+weo <- vroom(here("DATA/WEO.csv"))
+un_trade <- vroom(here("DATA/Merchandise_Trade_annual.csv"))
+un_trade_theil <- vroom(here("DATA/Merchandise_theil_index_product_market_annual.csv"))
+```
+
+## WEO
 
 
