@@ -1,8 +1,26 @@
 ---
 title: "Data_Description"
-format: html
-editor: visual
+author: "Ibrahim khribch and Lucas monnaert"
+format: 
+  revealjs:
+    echo: false
+  pptx:
+    echo: false
+lightbox: true
+df-print: kable
 ---
 
-#in this file we compute the tables for the data description #test
-#test 
+```{r}
+here::i_am("Trade_Data_Management_Project.Rproj")
+library(here)
+library(vroom)
+library(tidyr)
+library(ggplot2)
+theme_set(theme_bw())
+library(dplyr)
+```
+
+```{r}
+
+```
+
