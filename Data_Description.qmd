@@ -32,5 +32,17 @@ Therefore each value shouldn't be considered exact but a order of magnitude.
 
 ## UN Trade and development 
 
-## CEPII BACI database
+The United Nations Trade and Development provides annual trade statistics and economical measures through their UNCTASstat database, we use two annual datasets from this source for our project : 
+Merchandise Trade annual : this database provides a metric of the total amount of trade(imports and exports for each country, and they are expressed in US dollars 
+Merchandise Theil indices- Annual : this dataset provides the theil indice measure which is a metric for the concentration of a country’s imports and exports with the trading partners, we have two indices one is for market concentration and the other is for product concentration.
+
+
+## Centre d’Études prospectives et d’informations internationales(CEPII)
+CEPII is a French research institution specializing in international economics. 
+For our project we use their BACI database which provides annual trade information in an extensive and rigorous way, in fact the BACI provides bilateral data which also specifies the goods being traded. 
+the values are calculated using UN Comtrade data, and the CEPII reconciles the data accounting for the many sources of differences between the reporting countries of the UN, the final data base is presented using HS6 classification.
+CEPII is a French research institution specializing in international economics. 
+For our project we use their BACI database which provides annual trade information in an extensive and rigorous way, in fact the BACI provides bilateral data which also specifies the goods being traded. 
+the values are calculated using UN Comtrade data, and the CEPII reconciles the data accounting for the many sources of differences between the reporting countries of the UN, the final data base is presented using HS6 classification.
+
 
