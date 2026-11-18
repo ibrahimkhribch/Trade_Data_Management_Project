@@ -94,3 +94,15 @@ The gross debt (in percent of GDP) allows us to understand to what extent a coun
 The gross national savings (in percent of GDP) represent the part of the GDP that is not consumed.
 Finally the unemployment rate (in percent) measures the part of the population that is unemployed.
 All those variables can either explain the effect of an international shock on an economy.
+
+
+
+### Calculations
+
+```{r}
+WEO_GDP <- WEO |>
+  filter(INDICATOR=="Gross domestic product (GDP), Current prices, US dollar") |>
+  arrange(COUNTRY)
+```
+
+
