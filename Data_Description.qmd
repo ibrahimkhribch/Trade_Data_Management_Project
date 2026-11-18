@@ -118,6 +118,91 @@ Similarly the theil index database had some columns that were not relevant to ou
 
 The first important variable from the WEO is the Gross domestic production (GDP) (in Billions of US dollars). It measures the production of a country. It will be the base of our analysis through output we can infer from it. The Population (in millions) can help us measure the importance of the number of people while GDP per capita (in Billions of US dollars) the importance of the welfare of the inhabitants. The current account balance (in percent of GDP) helps us understand if the country is a lender or a borrower and in which proportion The gross debt (in percent of GDP) allows us to understand to what extent a country is indebted. The gross national savings (in percent of GDP) represent the part of the GDP that is not consumed. Finally the unemployment rate (in percent) measures the part of the population that is unemployed. All those variables can either explain the effect of an international shock on an economy.
 
+
+
+
+## Research question description
+
+The main goal of our project is to study the following economical question:
+
+**How does international trade and international openness affect a country’s resilience to a global crisis ?**
+
+We will focus on both developing and advanced economies and our goal is to understand what characteristics make some countries more “ resilient “ than others. We will try and determine indicators using R that can give better insight into the way each economy responds to crises.
+
+What motivates our project is the observation of the constant rise of globalization and the increasing link between countries, ever since the Second World War. 
+
+Nowadays, importation and exportation are essential in most economies around the world. As beneficial as globalization has been, it also came with some issues. Countries have less control on their economies, as the outside world's influence on prices inside the borders soar. Increase in tariff prices, pandemic (such as COVID-19) and geopolitical instability (such in the strait of Hormuz) affect economies all around the globe. However, we can notice that similar countries can have different reactions to a crisis. Some take years to recover while others hardly struggle. Our objective is to understand these differences through analyses on both variables describing the economy of the countries as well as data representing their international places (number of goods imported/exported, how many countries are traded with).
+
+This analysis will help us understand which place a country should aim to have in the world to have a growing economy, while keeping autonomy when facing a crisis.
+
+## Merging the datasets 
+
+```{r}
+
+# we start by constructing a database from WEO and un_trade_theil_processed 
+
+WEO_wide <- WEO |>
+  select(-FREQUENCY, -SCALE) |>
+  pivot_longer(
+    cols = `1995`:`2025`,
+    names_to = "Year",
+    values_to = "Value"
+  ) |>
+  pivot_wider(
+    names_from = INDICATOR,
+    values_from = Value
+  )
+
+# the year coulmn is seen as a character so we fix it using as.integer 
+WEO_wide <- WEO_wide |>
+  mutate(Year = as.integer(Year))
+
+theil_wide <- un_trade_theil_processed |>
+ select(Year,COUNTRY,`Flow Label`,`Series Label`,Index) |>
+  pivot_wider(
+    names_from = c(`Flow Label`,`Series Label`),
+    values_from = Index
+  )
+
+data_macro_theil <- WEO_wide |>
+  inner_join(theil_wide,by=join_by(COUNTRY,Year))
+
+# We can now see the number of countries we are working with 
+data_macro_theil |>
+  summarise(n_countries=n_distinct(COUNTRY))
+
+```
+
+
+```{r}
+# we now merge the theil database and WEO 
+
+trade_wide <- un_trade_processed |>
+  select(Year,COUNTRY,`Flow Label`,Trade_quantity,`Percentage of total world`) |>
+  pivot_wider(
+    names_from = `Flow Label`,
+    values_from = c(Trade_quantity,`Percentage of total world`)
+  )
+data_macro_trade <- WEO_wide |>
+  inner_join(trade_wide,by=join_by(COUNTRY,Year))
+
+# we verify that the two merged datasets have the same number of countries
+data_macro_trade |>
+  summarise(n_countries=n_distinct(COUNTRY))
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
 ### Construction of GDP growth
 
 ```{r}
@@ -139,37 +224,3 @@ for (j in 1:nrow(WEO_GDP)){
 # Adding GDP growth to the WEO dataset
 WEO <- rbind(WEO,WEO_growth)
 ```
-
-## First Plots :
-
-```{r}
-# we start by constructing a database from WEO and un_trade_theil_processed 
-
-
-WEO_wide <- WEO |>
-  select(-FREQUENCY, -SCALE) |>
-  pivot_longer(
-    cols = `1995`:`2025`,
-    names_to = "Year",
-    values_to = "Value"
-  ) |>
-  pivot_wider(
-    names_from = INDICATOR,
-    values_from = Value
-  )
-
-```
-
-## Research question description
-
-The main goal of our project is to study the following economical question:
-
-**How does international trade and international openness affect a country’s resilience to a global crisis ?**
-
-We will focus on both developing and advanced economies and our goal is to understand what characteristics make some countries more “ resilient “ than others. We will try and determine indicators using R that can give better insight into the way each economy responds to crises.
-
-What motivates our project is the observation of the constant rise of globalization and the increasing link between countries, ever since the Second World War. 
-
-Nowadays, importation and exportation are essential in most economies around the world. As beneficial as globalization has been, it also came with some issues. Countries have less control on their economies, as the outside world's influence on prices inside the borders soar. Increase in tariff prices, pandemic (such as COVID-19) and geopolitical instability (such in the strait of Hormuz) affect economies all around the globe. However, we can notice that similar countries can have different reactions to a crisis. Some take years to recover while others hardly struggle. Our objective is to understand these differences through analyses on both variables describing the economy of the countries as well as data representing their international places (number of goods imported/exported, how many countries are traded with).
-
-This analysis will help us understand which place a country should aim to have in the world to have a growing economy, while keeping autonomy when facing a crisis.
