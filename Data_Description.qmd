@@ -14,21 +14,21 @@ theme_set(theme_bw())
 library(dplyr)
 ```
 
-### Data Source Description
+## Data Source Description
 
-## WEO-IMF
+### WEO-IMF
 
 Our first data set comes from the International Monetary fund (IMF). It is the World Economic Outlook (WEO) from October 2026. The data are calculated using hypothesis, notably on oil prices and interest rates. Some numerical values change with the evolution of the calculation methods, especially for countries with less qualitative data. The FMI uses national accounting , balance of payments statistics and public finances statistics which explains the difference of quality between countries input. The frame of reference may change between countries, possibly leading to different method of calculation. Therefore each value shouldn't be considered exact but a order of magnitude.
 
-## UN Trade and development
+### UN Trade and development
 
 The United Nations Trade and Development provides annual trade statistics and economical measures through their UNCTASstat database, we use two annual datasets from this source for our project : Merchandise Trade annual : this database provides a metric of the total amount of trade(imports and exports for each country, and they are expressed in US dollars Merchandise Theil indices- Annual : this dataset provides the theil indice measure which is a metric for the concentration of a country’s imports and exports with the trading partners, we have two indices one is for market concentration and the other is for product concentration.
 
-## Centre d’Études prospectives et d’informations internationales(CEPII)
+### Centre d’Études prospectives et d’informations internationales(CEPII)
 
 CEPII is a French research institution specializing in international economics. For our project we use their BACI database which provides annual trade information in an extensive and rigorous way, in fact the BACI provides bilateral data which also specifies the goods being traded. the values are calculated using UN Comtrade data, and the CEPII reconciles the data accounting for the many sources of differences between the reporting countries of the UN, the final data base is presented using HS6 classification. CEPII is a French research institution specializing in international economics. For our project we use their BACI database which provides annual trade information in an extensive and rigorous way, in fact the BACI provides bilateral data which also specifies the goods being traded. the values are calculated using UN Comtrade data, and the CEPII reconciles the data accounting for the many sources of differences between the reporting countries of the UN, the final data base is presented using HS6 classification.
 
-### Data sets Description table
+## Data sets Description table
 
 ```{r}
 #data import 
@@ -69,7 +69,7 @@ WEO <- weo |>
 
 ```
 
-## WEO
+### WEO
 
 `weo` was the original data set that we imported with `vroom`. We then removed the three first columns which corresponded to the data set, the series code and the type of measure since we didn't need them. The clean data set is stored in `WEO.`
 
@@ -81,7 +81,7 @@ Number of rows : `{r} nrow(WEO)`
 
 Number of columns : `{r} ncol(WEO)`
 
-## UN Trade and development
+### UN Trade and development
 
 ```{r}
 un_trade_processed <- un_trade |> 
@@ -106,25 +106,17 @@ un_trade_theil_processed <- un_trade_theil|>
 Similarly the theil index database had some columns that were not relevant to our project so after processing the database and storing it in un_trade_theil_processed The table format is as follows :
 
 | Year | Economy | Economy Label | Flow | Flow Label | Series | Series label | index |
-|----------|----------|----------|--------|----------|--------|--------|--------|
+|---------|---------|---------|---------|---------|---------|---------|---------|
 | Number of rows : | `{r} nrow(un_trade_theil_processed)` |  |  |  |  |  |  |
 | Number of columns : | `{r} ncol(un_trade_theil_processed)` |  |  |  |  |  |  |
 
-## CEPII BACI : 
+### CEPII BACI :
 
-### Description of important variables
+## Description of important variables
 
-## WEO
+### WEO
 
-The first important variable from the WEO is the Gross domestic production (GDP) (in Billions of US dollars). It measures the production of a country. It will be the base of our analysis through output we can infer from it.
-The Population (in millions) can help us measure the importance of the number of people while GDP per capita (in Billions of US dollars) the importance of the welfare of the inhabitants.
-The current account balance (in percent of GDP) helps us understand if the country is a lender or a borrower and in which proportion
-The gross debt (in percent of GDP) allows us to understand to what extent a country is indebted.
-The gross national savings (in percent of GDP) represent the part of the GDP that is not consumed.
-Finally the unemployment rate (in percent) measures the part of the population that is unemployed.
-All those variables can either explain the effect of an international shock on an economy.
-
-
+The first important variable from the WEO is the Gross domestic production (GDP) (in Billions of US dollars). It measures the production of a country. It will be the base of our analysis through output we can infer from it. The Population (in millions) can help us measure the importance of the number of people while GDP per capita (in Billions of US dollars) the importance of the welfare of the inhabitants. The current account balance (in percent of GDP) helps us understand if the country is a lender or a borrower and in which proportion The gross debt (in percent of GDP) allows us to understand to what extent a country is indebted. The gross national savings (in percent of GDP) represent the part of the GDP that is not consumed. Finally the unemployment rate (in percent) measures the part of the population that is unemployed. All those variables can either explain the effect of an international shock on an economy.
 
 ### Construction of GDP growth
 
@@ -148,9 +140,7 @@ for (j in 1:nrow(WEO_GDP)){
 WEO <- rbind(WEO,WEO_growth)
 ```
 
-
-=======
-## First Plots : 
+## First Plots :
 
 ```{r}
 # we start by constructing a database from WEO and un_trade_theil_processed 
@@ -170,3 +160,16 @@ WEO_wide <- WEO |>
 
 ```
 
+## Research question description
+
+The main goal of our project is to study the following economical question:
+
+**How does international trade and international openness affect a country’s resilience to a global crisis ?**
+
+We will focus on both developing and advanced economies and our goal is to understand what characteristics make some countries more “ resilient “ than others. We will try and determine indicators using R that can give better insight into the way each economy responds to crises.
+
+What motivates our project is the observation of the constant rise of globalization and the increasing link between countries, ever since the Second World War. 
+
+Nowadays, importation and exportation are essential in most economies around the world. As beneficial as globalization has been, it also came with some issues. Countries have less control on their economies, as the outside world's influence on prices inside the borders soar. Increase in tariff prices, pandemic (such as COVID-19) and geopolitical instability (such in the strait of Hormuz) affect economies all around the globe. However, we can notice that similar countries can have different reactions to a crisis. Some take years to recover while others hardly struggle. Our objective is to understand these differences through analyses on both variables describing the economy of the countries as well as data representing their international places (number of goods imported/exported, how many countries are traded with).
+
+This analysis will help us understand which place a country should aim to have in the world to have a growing economy, while keeping autonomy when facing a crisis.
