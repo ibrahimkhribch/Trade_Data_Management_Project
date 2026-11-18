@@ -58,7 +58,8 @@ Number of columns : `{r} ncol(WEO)`
 
 ```{r}
 un_trade_processed <- un_trade |> 
-  select(1:6, `Percentage of total world`)
+  select(1:6, `Percentage of total world`)|>
+  rename(Trade_quantity = `Millions of US$ at current prices`)
 ```
 
 The original data set Merchandise Trade Annual contained unecssary information for our project so after havinf proceesed the data file we stored it in un_trade_processed The table format is as follows :
@@ -70,7 +71,7 @@ The original data set Merchandise Trade Annual contained unecssary information f
 
 ```{r}
 un_trade_theil_processed <- un_trade_theil|>
-  select(1:8)
+  select(1:8) 
 ```
 
 Similarly the theil index database had some columns that were not relevant to our project so after processing the database and storing it in un_trade_theil_processed The table format is as follows :
