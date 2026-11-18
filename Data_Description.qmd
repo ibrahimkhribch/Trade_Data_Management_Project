@@ -191,9 +191,34 @@ data_macro_trade |>
   summarise(n_countries=n_distinct(COUNTRY))
 ```
 
+# Some plots that motivates our research question
 
+```{r}
+data_macro_theil|>
+  filter(Year%in%c(2019,2020,2021))|>
+  ggplot(aes(x=`Gross domestic product (GDP), Current prices, Per capita, US dollar` ,y=`Exports_Overall Theil Index`,color=factor(Year)))+
+  geom_point(alpha=0.5)
+```
 
+```{r}
+data_macro_trade|>
+  filter(Year%in%c(2019,2020,2021) )|>
+  ggplot(aes(x=`Gross domestic product (GDP), Current prices, Per capita, US dollar` ,y=Trade_quantity_Exports,color=factor(Year)))+
+  geom_point(alpha=0.5)
+```
 
+```{r}
+trade_openess <- data_macro_trade |>
+  mutate (
+    openess = 100*(Trade_quantity_Imports + Trade_quantity_Exports)/
+      (1000*(`Gross domestic product (GDP), Current prices, US dollar`))
+  )
+
+trade_openess |>
+  filter(Year%in%c(2019,2020,2021) )|>
+  ggplot(aes(x=`Gross domestic product (GDP), Current prices, Per capita, US dollar` ,y=openess,color=factor(Year)))+
+  geom_point(alpha=0.5)
+```
 
 
 
