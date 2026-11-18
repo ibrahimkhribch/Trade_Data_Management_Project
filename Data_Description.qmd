@@ -126,13 +126,26 @@ All those variables can either explain the effect of an international shock on a
 
 
 
-<<<<<<< HEAD
-### Calculations
+### Construction of GDP growth
 
 ```{r}
 WEO_GDP <- WEO |>
   filter(INDICATOR=="Gross domestic product (GDP), Current prices, US dollar") |>
   arrange(COUNTRY)
+
+WEO_growth <- WEO_GDP 
+for (i in 6:35) {
+  for (j in 1:nrow(WEO_GDP)) {
+    WEO_growth[j,i] <- (WEO_GDP[j,i][[1]]-WEO_GDP[j,i-1][[1]])/WEO_GDP[j,i-1][[1]]
+  }}
+for (j in 1:nrow(WEO_GDP)){
+  WEO_growth[j,2]="Gross domestic product growth"
+  WEO_growth[j,4]="Percent"
+  WEO_growth[j,5]=NA
+}
+
+# Adding GDP growth to the WEO dataset
+WEO <- rbind(WEO,WEO_growth)
 ```
 
 
@@ -157,4 +170,3 @@ WEO_wide <- WEO |>
 
 ```
 
->>>>>>> 0ea84b87ee8886fd5132a9756a37e55d13c1c4f1
