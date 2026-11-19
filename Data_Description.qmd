@@ -253,10 +253,20 @@ data_macro_trade |>
     year_last = max(Year)
   )
 
-#Trade openness statistic
-#Average of Trade openness in our observation sample
-#Standard deviation of Trade openness in our observation sample
-# Median of Trade openness in our observation sample
+trade_openess <- data_macro_trade |>
+  mutate (
+    openess = 100*(Trade_quantity_Imports + Trade_quantity_Exports)/
+      (1000*(`Gross domestic product (GDP), Current prices, US dollar`))
+  )|>
+  drop_na()
+
+trade_openess |>
+  summarise(
+    Average = mean(openess),
+    Standard_Deviation = sd(openess),
+    Median = median(openess)
+  )
+
 
 
 ```
@@ -295,12 +305,7 @@ data_macro_trade|>
 
 ```{r}
 #GDP as a function of Trade openess before during and after the COVID pandemic crisis
-trade_openess <- data_macro_trade |>
-  mutate (
-    openess = 100*(Trade_quantity_Imports + Trade_quantity_Exports)/
-      (1000*(`Gross domestic product (GDP), Current prices, US dollar`))
-  )|>
-  drop_na()
+
 
 trade_openess |>
   filter(Year%in%c(2019,2020,2021) )|>
