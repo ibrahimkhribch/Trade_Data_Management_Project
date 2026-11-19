@@ -1,6 +1,6 @@
 ---
 title: "Data_Description"
-author: "Ibrahim khribch and Lucas monnaert"
+author: "Ibrahim Khribch and Lucas Monnaert"
 format: html
 ---
 
@@ -321,21 +321,16 @@ trade_openess |>
 ### Construction of GDP growth
 
 ```{r}
-WEO_GDP <- WEO |>
-  select(COUNTRY,Real_GDP,Year)|>
-  arrange(COUNTRY)
+WEO <- WEO |> 
+  arrange(COUNTRY,Year) |>
+  mutate(
+    Growth_rate=(Real_GDP-lag(Real_GDP))/lag(Real_GDP)
+    )
 
-WEO_growth <- WEO_GDP 
-for (i in 6:35) {
-  for (j in 1:nrow(WEO_GDP)) {
-    WEO_growth[j,i] <- (WEO_GDP[j,i][[1]]-WEO_GDP[j,i-1][[1]])/WEO_GDP[j,i-1][[1]]
-  }}
-for (j in 1:nrow(WEO_GDP)){
-  WEO_growth[j,2]="Gross domestic product growth"
-  WEO_growth[j,4]="Percent"
-  WEO_growth[j,5]=NA
+for (i in 2:nrow(WEO)) {
+  if (WEO[[i,1]]!= WEO[[i-1,1]]) {
+    WEO[i,11] <- NA
+  }
 }
-
-# Adding GDP growth to the WEO dataset
-WEO <- rbind(WEO,WEO_growth)
 ```
+
