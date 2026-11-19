@@ -118,8 +118,27 @@ Similarly the theil index database had some columns that were not relevant to ou
 
 The first important variable from the WEO is the Gross domestic production (GDP) (in Billions of US dollars). It measures the production of a country. It will be the base of our analysis through output we can infer from it. The Population (in millions) can help us measure the importance of the number of people while GDP per capita (in Billions of US dollars) the importance of the welfare of the inhabitants. The current account balance (in percent of GDP) helps us understand if the country is a lender or a borrower and in which proportion The gross debt (in percent of GDP) allows us to understand to what extent a country is indebted. The gross national savings (in percent of GDP) represent the part of the GDP that is not consumed. Finally the unemployment rate (in percent) measures the part of the population that is unemployed. All those variables can either explain the effect of an international shock on an economy.
 
+### UN Trade and development
+# UN Trade data: 
 
+From this database we found that the foloowing variables were the most important for the rest of our project : 
+  - The trade quantity assosciated with each flow label either imports or exports 
+  - the percentage of the world trade that the flow label trade quantity of each corresponding country represents 
+these variables will serve as the frist explonatory variables as well as the bricks to constructing some aggregat variables that we will explore all along the project such as the trade quantity contraction after a crisis as well as other aggregates like trade openess. 
 
+# UN theil index data: 
+This database covers essentially the theil index but it is important to note that the following categories of theil index will be used each for a different purpose : 
+  for Imports : 
+    - Overall Theil Index
+    - Product concentration Theil index
+    - Market (per product) concentration Theil index
+    
+  for Exports : 
+    - Overall Theil Index
+    - Product concentration Theil index
+    - Market (per product) concentration Theil index
+
+# CEPII BACI : 
 
 ## Research question description
 
@@ -167,10 +186,6 @@ theil_wide <- un_trade_theil_processed |>
 data_macro_theil <- WEO_wide |>
   inner_join(theil_wide,by=join_by(COUNTRY,Year))
 
-# We can now see the number of countries we are working with 
-data_macro_theil |>
-  summarise(n_countries=n_distinct(COUNTRY))
-
 ```
 
 
@@ -185,10 +200,33 @@ trade_wide <- un_trade_processed |>
   )
 data_macro_trade <- WEO_wide |>
   inner_join(trade_wide,by=join_by(COUNTRY,Year))
+```
 
-# we verify that the two merged datasets have the same number of countries
+# Summary Statistics 
+```{r}
+
+data_macro_theil |>
+  summarise(
+    n_countries = n_distinct(COUNTRY),
+    n_observations = n(),
+    year_start = min(Year),
+    year_last = max(Year)
+  )
+
 data_macro_trade |>
-  summarise(n_countries=n_distinct(COUNTRY))
+  summarise(
+    n_countries = n_distinct(COUNTRY),
+    n_observations = n(),
+    year_start = min(Year),
+    year_last = max(Year)
+  )
+
+#Trade openness statistic
+#Average of Trade openness in our observation sample
+#Standard deviation of Trade openness in our observation sample
+# Median of Trade openness in our observation sample
+
+
 ```
 
 # Some plots that motivates our research question
