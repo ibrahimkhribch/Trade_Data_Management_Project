@@ -194,39 +194,50 @@ data_macro_trade |>
 # Some plots that motivates our research question
 
 ```{r}
+#GDP per capita as a function of Exports theil index before during and after the COVID pandemic crisis
 data_macro_theil|>
   filter(Year%in%c(2019,2020,2021))|>
+  filter(!is.na(`Gross domestic product (GDP), Current prices, Per capita, US dollar`) & !is.na(`Exports_Overall Theil Index`))|>
   ggplot(aes(x=`Gross domestic product (GDP), Current prices, Per capita, US dollar` ,y=`Exports_Overall Theil Index`,color=factor(Year)))+
   geom_point(alpha=0.5)
 ```
-
 ```{r}
-data_macro_trade|>
-  filter(Year%in%c(2019,2020,2021) )|>
-  ggplot(aes(x=`Gross domestic product (GDP), Current prices, Per capita, US dollar` ,y=Trade_quantity_Exports,color=factor(Year)))+
+#GDP per capita as a function of Imports theil index before during and after the COVID pandemic crisis
+data_macro_theil|>
+  filter(Year%in%c(2019,2020,2021))|>
+  filter(!is.na(`Gross domestic product (GDP), Current prices, Per capita, US dollar`) & !is.na(`Imports_Overall Theil Index`))|>
+  ggplot(aes(x=`Gross domestic product (GDP), Current prices, Per capita, US dollar` ,y=`Imports_Overall Theil Index`,color=factor(Year)))+
   geom_point(alpha=0.5)
 ```
+What we can notice is that the more developped economies,ie the ones with the higher GDP per Capita tend to have a lower theil index in both imports and exports compared to countries with low level of GDP per capita so this suggests that trade diversification is positively correlated with a higher level of GDP per capita
 
 ```{r}
+#GDP per capita as a function of the quantity exports trade before during and after the COVID pandemic crisis
+data_macro_trade|>
+  filter(Year%in%c(2019,2020,2021) )|>
+  filter(!is.na(`Gross domestic product (GDP), Current prices, Per capita, US dollar`)&!is.na(Trade_quantity_Exports))|>
+  ggplot(aes(x=`Gross domestic product (GDP), Current prices, Per capita, US dollar` ,y=Trade_quantity_Exports))+
+  geom_point(alpha=0.2)+
+  facet_wrap(~Year)
+```
+
+
+
+```{r}
+#GDP as a function of Trade openess before during and after the COVID pandemic crisis
 trade_openess <- data_macro_trade |>
   mutate (
     openess = 100*(Trade_quantity_Imports + Trade_quantity_Exports)/
       (1000*(`Gross domestic product (GDP), Current prices, US dollar`))
-  )
+  )|>
+  drop_na()
 
 trade_openess |>
   filter(Year%in%c(2019,2020,2021) )|>
   ggplot(aes(x=`Gross domestic product (GDP), Current prices, Per capita, US dollar` ,y=openess,color=factor(Year)))+
-  geom_point(alpha=0.5)
+  geom_point(alpha=0.5)+
+  facet_wrap(~Year)
 ```
-
-
-
-
-
-
-
-
 
 ### Construction of GDP growth
 
