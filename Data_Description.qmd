@@ -33,6 +33,7 @@ CEPII is a French research institution specializing in international economics. 
 ```{r}
 #data import 
 weo <- vroom(here("DATA/WEO.csv"))
+weo_Constant_Price <- vroom(here("DATA/WEO_GDPConstantPrice.csv"))
 un_trade <- vroom(here("DATA/Merchandise_Trade_annual.csv"),col_types = cols(
   Year = col_integer(),
   Economy = col_character(),
@@ -66,6 +67,9 @@ un_trade_theil <- vroom(here("DATA/Merchandise_theil_index_product_market_annual
 WEO <- weo |>
   select(-c(1:3))
 
+WEO_Constant_Price <- weo_Constant_Price |>
+  select(-c(1:3))
+
 BACI_2019<-vroom(here("DATA/BACI_HS92_Y2019_V202601.csv"))
 BACI_2020<-vroom(here("DATA/BACI_HS92_Y2020_V202601.csv"))
 BACI_2021<-vroom(here("DATA/BACI_HS92_Y2021_V202601.csv"))
@@ -84,6 +88,16 @@ product_codes <- vroom(here("DATA/product_codes_HS92_V202601.csv"),delim = ",")
 Number of rows : `{r} nrow(WEO)`
 
 Number of columns : `{r} ncol(WEO)`
+
+`WEO_Constant_Price` is the data set with the GDP in constant price.
+
+| Country | Indicator | Frequency | Scale | Year (1995-2025) |
+|---------|-----------|-----------|-------|------------------|
+|         |           |           |       |                  |
+
+Number of rows : `{r} nrow(WEO_Constant_Price)`
+
+Number of columns : `{r} ncol(WEO_Constant_Price)`
 
 ### UN Trade and development
 
@@ -120,7 +134,13 @@ Similarly the theil index database had some columns that were not relevant to ou
 
 ### WEO
 
-The first important variable from the WEO is the Gross domestic production (GDP) (in Billions of US dollars). It measures the production of a country. It will be the base of our analysis through output we can infer from it. The Population (in millions) can help us measure the importance of the number of people while GDP per capita (in Billions of US dollars) the importance of the welfare of the inhabitants. The current account balance (in percent of GDP) helps us understand if the country is a lender or a borrower and in which proportion The gross debt (in percent of GDP) allows us to understand to what extent a country is indebted. The gross national savings (in percent of GDP) represent the part of the GDP that is not consumed. Finally the unemployment rate (in percent) measures the part of the population that is unemployed. All those variables can either explain the effect of an international shock on an economy.
+The first important variable from the WEO is the Gross domestic production (GDP) (in Billions of US dollars). It measures the production of a country. It will be the base of our analysis through output we can infer from it. 
+The GDP in constant price (in Billions of domestic currency) will help us calculate the growth rate of the GDP.
+The Population (in millions) can help us measure the importance of the number of people while GDP per capita (in Billions of US dollars) the importance of the welfare of the inhabitants. 
+The current account balance (in percent of GDP) helps us understand if the country is a lender or a borrower and in which proportion 
+The gross debt (in percent of GDP) allows us to understand to what extent a country is indebted. 
+The gross national savings (in percent of GDP) represent the part of the GDP that is not consumed. 
+Finally the unemployment rate (in percent) measures the part of the population that is unemployed. All those variables can either explain the effect of an international shock on an economy.
 
 ### UN Trade and development
 # UN Trade data: 
@@ -289,8 +309,8 @@ trade_openess |>
 ### Construction of GDP growth
 
 ```{r}
-WEO_GDP <- WEO |>
-  filter(INDICATOR=="Gross domestic product (GDP), Current prices, US dollar") |>
+WEO_GDP <- WEO_Constant_Price |>
+  filter(INDICATOR=="Gross domestic product (GDP), Constant prices, Domestic currency") |>
   arrange(COUNTRY)
 
 WEO_growth <- WEO_GDP 
