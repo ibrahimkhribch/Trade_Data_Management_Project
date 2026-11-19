@@ -64,17 +64,39 @@ un_trade_theil <- vroom(here("DATA/Merchandise_theil_index_product_market_annual
   `Index Missing value` = col_character()
 ))
 
+# IMF data without GDP_Real 
 WEO <- weo |>
-  select(-c(1:3))
-
+  select(-c(1:3))|>
+  select(-FREQUENCY, -SCALE) |>
+  pivot_longer(
+    cols = `1995`:`2025`,
+    names_to = "Year",
+    values_to = "Value"
+  ) |>
+  pivot_wider(
+    names_from = INDICATOR,
+    values_from = Value
+  )|>
+  mutate(Year = as.integer(Year))
+  
+#GDP real 
 WEO_Constant_Price <- weo_Constant_Price |>
-  select(-c(1:3))
+  select(COUNTRY,`1995`:`2025`)|>
+  pivot_longer(
+    cols=`1995`:`2025` ,
+    names_to = "Year",
+    values_to = "Real_GDP"
+  )|>
+  mutate(Year = as.integer(Year))
 
-BACI_2019<-vroom(here("DATA/BACI_HS92_Y2019_V202601.csv"))
-BACI_2020<-vroom(here("DATA/BACI_HS92_Y2020_V202601.csv"))
-BACI_2021<-vroom(here("DATA/BACI_HS92_Y2021_V202601.csv"))
-country_codes <- vroom(here("DATA/country_codes_V202601.csv"))
-product_codes <- vroom(here("DATA/product_codes_HS92_V202601.csv"),delim = ",")
+WEO <- WEO |> 
+  left_join(WEO_Constant_Price,by=join_by(COUNTRY,Year))
+
+#BACI_2019<-vroom(here("DATA/BACI_HS92_Y2019_V202601.csv"))
+#BACI_2020<-vroom(here("DATA/BACI_HS92_Y2020_V202601.csv"))
+#BACI_2021<-vroom(here("DATA/BACI_HS92_Y2021_V202601.csv"))
+#country_codes <- vroom(here("DATA/country_codes_V202601.csv"))
+#product_codes <- vroom(here("DATA/product_codes_HS92_V202601.csv"),delim = ",")
 ```
 
 ### WEO
@@ -181,25 +203,6 @@ This analysis will help us understand which place a country should aim to have i
 ## Merging the datasets 
 
 ```{r}
-
-# we start by constructing a database from WEO and un_trade_theil_processed 
-
-WEO_wide <- WEO |>
-  select(-FREQUENCY, -SCALE) |>
-  pivot_longer(
-    cols = `1995`:`2025`,
-    names_to = "Year",
-    values_to = "Value"
-  ) |>
-  pivot_wider(
-    names_from = INDICATOR,
-    values_from = Value
-  )
-
-# the year coulmn is seen as a character so we fix it using as.integer 
-WEO_wide <- WEO_wide |>
-  mutate(Year = as.integer(Year))
-
 theil_wide <- un_trade_theil_processed |>
  select(Year,COUNTRY,`Flow Label`,`Series Label`,Index) |>
   pivot_wider(
@@ -207,7 +210,7 @@ theil_wide <- un_trade_theil_processed |>
     values_from = Index
   )
 
-data_macro_theil <- WEO_wide |>
+data_macro_theil <- WEO |>
   inner_join(theil_wide,by=join_by(COUNTRY,Year))
 
 ```
@@ -222,7 +225,7 @@ trade_wide <- un_trade_processed |>
     names_from = `Flow Label`,
     values_from = c(Trade_quantity,`Percentage of total world`)
   )
-data_macro_trade <- WEO_wide |>
+data_macro_trade <- WEO |>
   inner_join(trade_wide,by=join_by(COUNTRY,Year))
 ```
 
@@ -309,8 +312,8 @@ trade_openess |>
 ### Construction of GDP growth
 
 ```{r}
-WEO_GDP <- WEO_Constant_Price |>
-  filter(INDICATOR=="Gross domestic product (GDP), Constant prices, Domestic currency") |>
+WEO_GDP <- WEO |>
+  select(COUNTRY,Real_GDP,Year)|>
   arrange(COUNTRY)
 
 WEO_growth <- WEO_GDP 
