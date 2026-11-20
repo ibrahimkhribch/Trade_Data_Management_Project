@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Ibrahim khribch and Lucas monnaert">
+<meta name="author" content="Ibrahim Khribch and Lucas Monnaert">
 
 <title>Data_Description</title>
 <style>
@@ -23,41 +23,6 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
-}
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -95,7 +60,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Author</div>
     <div class="quarto-title-meta-contents">
-             <p>Ibrahim khribch and Lucas monnaert </p>
+             <p>Ibrahim Khribch and Lucas Monnaert </p>
           </div>
   </div>
     
@@ -108,93 +73,55 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>here<span class="sc">::</span><span class="fu">i_am</span>(<span class="st">"Trade_Data_Management_Project.Rproj"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>here() starts at /Users/mac/Desktop/M1 QEA/Data management/Trade_Data_Management_Project</code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(vroom)</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">theme_set</span>(<span class="fu">theme_bw</span>())</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>
-Attaching package: 'dplyr'</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>The following objects are masked from 'package:stats':
-
-    filter, lag</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>The following objects are masked from 'package:base':
-
-    intersect, setdiff, setequal, union</code></pre>
-</div>
-</div>
-<section id="data-source-description" class="level3">
-<h3 class="anchored" data-anchor-id="data-source-description">Data Source Description</h3>
+<section id="link-to-the-github" class="level2">
+<h2 class="anchored" data-anchor-id="link-to-the-github">Link to the GitHub</h2>
+<p>https://github.com/ibrahimkhribch/Trade_Data_Management_Project</p>
 </section>
-<section id="weo-imf" class="level2">
-<h2 class="anchored" data-anchor-id="weo-imf">WEO-IMF</h2>
+<section id="data-source-description" class="level2">
+<h2 class="anchored" data-anchor-id="data-source-description">Data Source Description</h2>
+<p>First of all we would like to note that all the dataset that we are working with is public data and can be downloaded and used by anyone.</p>
+<section id="weo-imf" class="level3">
+<h3 class="anchored" data-anchor-id="weo-imf">WEO-IMF</h3>
 <p>Our first data set comes from the International Monetary fund (IMF). It is the World Economic Outlook (WEO) from October 2026. The data are calculated using hypothesis, notably on oil prices and interest rates. Some numerical values change with the evolution of the calculation methods, especially for countries with less qualitative data. The FMI uses national accounting , balance of payments statistics and public finances statistics which explains the difference of quality between countries input. The frame of reference may change between countries, possibly leading to different method of calculation. Therefore each value shouldn’t be considered exact but a order of magnitude.</p>
 </section>
-<section id="un-trade-and-development" class="level2">
-<h2 class="anchored" data-anchor-id="un-trade-and-development">UN Trade and development</h2>
+<section id="un-trade-and-development" class="level3">
+<h3 class="anchored" data-anchor-id="un-trade-and-development">UN Trade and development</h3>
 <p>The United Nations Trade and Development provides annual trade statistics and economical measures through their UNCTASstat database, we use two annual datasets from this source for our project : Merchandise Trade annual : this database provides a metric of the total amount of trade(imports and exports for each country, and they are expressed in US dollars Merchandise Theil indices- Annual : this dataset provides the theil indice measure which is a metric for the concentration of a country’s imports and exports with the trading partners, we have two indices one is for market concentration and the other is for product concentration.</p>
 </section>
-<section id="centre-détudes-prospectives-et-dinformations-internationalescepii" class="level2">
-<h2 class="anchored" data-anchor-id="centre-détudes-prospectives-et-dinformations-internationalescepii">Centre d’Études prospectives et d’informations internationales(CEPII)</h2>
+<section id="centre-détudes-prospectives-et-dinformations-internationalescepii" class="level3">
+<h3 class="anchored" data-anchor-id="centre-détudes-prospectives-et-dinformations-internationalescepii">Centre d’Études prospectives et d’informations internationales(CEPII)</h3>
 <p>CEPII is a French research institution specializing in international economics. For our project we use their BACI database which provides annual trade information in an extensive and rigorous way, in fact the BACI provides bilateral data which also specifies the goods being traded. the values are calculated using UN Comtrade data, and the CEPII reconciles the data accounting for the many sources of differences between the reporting countries of the UN, the final data base is presented using HS6 classification. CEPII is a French research institution specializing in international economics. For our project we use their BACI database which provides annual trade information in an extensive and rigorous way, in fact the BACI provides bilateral data which also specifies the goods being traded. the values are calculated using UN Comtrade data, and the CEPII reconciles the data accounting for the many sources of differences between the reporting countries of the UN, the final data base is presented using HS6 classification.</p>
-<section id="data-sets-description-table" class="level3">
-<h3 class="anchored" data-anchor-id="data-sets-description-table">Data sets Description table</h3>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">#data import </span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>weo <span class="ot">&lt;-</span> <span class="fu">vroom</span>(<span class="fu">here</span>(<span class="st">"DATA/WEO.csv"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Rows: 1264 Columns: 38
-── Column specification ────────────────────────────────────────────────────────
-Delimiter: ","
-chr  (7): DATASET, SERIES_CODE, OBS_MEASURE, COUNTRY, INDICATOR, FREQUENCY, ...
-dbl (31): 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005, ...
-
-ℹ Use `spec()` to retrieve the full column specification for this data.
-ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>un_trade <span class="ot">&lt;-</span> <span class="fu">vroom</span>(<span class="fu">here</span>(<span class="st">"DATA/Merchandise_Trade_annual.csv"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Rows: 46108 Columns: 14
-── Column specification ────────────────────────────────────────────────────────
-Delimiter: ","
-chr (10): Economy, Economy Label, Flow, Flow Label, Millions of US$ at curre...
-dbl  (4): Year, Millions of US$ at current prices, Percentage of total world...
-
-ℹ Use `spec()` to retrieve the full column specification for this data.
-ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>un_trade_theil <span class="ot">&lt;-</span> <span class="fu">vroom</span>(<span class="fu">here</span>(<span class="st">"DATA/Merchandise_theil_index_product_market_annual.csv"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Rows: 55290 Columns: 10
-── Column specification ────────────────────────────────────────────────────────
-Delimiter: ","
-chr (6): Economy, Economy Label, Flow, Flow Label, Series Label, Index Missi...
-dbl (3): Year, Series, Index
-lgl (1): Index Footnote
-
-ℹ Use `spec()` to retrieve the full column specification for this data.
-ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>WEO <span class="ot">&lt;-</span> weo <span class="sc">|&gt;</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
 </section>
 </section>
-<section id="weo" class="level2">
-<h2 class="anchored" data-anchor-id="weo">WEO</h2>
+<section id="data-sets-description-table" class="level2">
+<h2 class="anchored" data-anchor-id="data-sets-description-table">Data sets Description table</h2>
+<section id="weo" class="level3">
+<h3 class="anchored" data-anchor-id="weo">WEO</h3>
 <p><code>weo</code> was the original data set that we imported with <code>vroom</code>. We then removed the three first columns which corresponded to the data set, the series code and the type of measure since we didn’t need them. The clean data set is stored in <code>WEO.</code></p>
-<table class="caption-top table">
+<table class="caption-top">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 19%">
+<col style="width: 19%">
+<col style="width: 12%">
+<col style="width: 32%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Country</th>
+<th>Indicator</th>
+<th>Frequency</th>
+<th>Scale</th>
+<th>Y ear (1995-2025)</th>
+</tr>
+</thead>
+<tbody>
+</tbody>
+</table>
+<p>Number of rows : 6076</p>
+<p>Number of columns : 10</p>
+<p><code>WEO_Constant_Price</code> is the data set with the GDP in constant price.</p>
+<table class="caption-top">
 <thead>
 <tr class="header">
 <th>Country</th>
@@ -205,35 +132,23 @@ lgl (1): Index Footnote
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
 </tbody>
 </table>
-<p>Number of rows : 1264</p>
-<p>Number of columns : 35</p>
+<p>Number of rows : 6076</p>
+<p>Number of columns : 3</p>
 </section>
-<section id="un-trade-and-development-1" class="level2">
-<h2 class="anchored" data-anchor-id="un-trade-and-development-1">UN Trade and development</h2>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>un_trade_processed <span class="ot">&lt;-</span> un_trade <span class="sc">|&gt;</span> </span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>, <span class="st">`</span><span class="at">Percentage of total world</span><span class="st">`</span>)<span class="sc">|&gt;</span></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">Trade_quantity =</span> <span class="st">`</span><span class="at">Millions of US$ at current prices</span><span class="st">`</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
+<section id="un-trade-and-development-1" class="level3">
+<h3 class="anchored" data-anchor-id="un-trade-and-development-1">UN Trade and development</h3>
 <p>The original data set Merchandise Trade Annual contained unecssary information for our project so after havinf proceesed the data file we stored it in un_trade_processed The table format is as follows :</p>
-<table class="caption-top table">
+<table class="caption-top">
 <colgroup>
-<col style="width: 14%">
-<col style="width: 14%">
-<col style="width: 14%">
-<col style="width: 14%">
-<col style="width: 14%">
-<col style="width: 14%">
-<col style="width: 14%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 15%">
+<col style="width: 20%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -247,41 +162,21 @@ lgl (1): Index Footnote
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
-<td>Number of rows :</td>
-<td>46108</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="even">
-<td>Number of columns :</td>
-<td>7</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
 </tbody>
 </table>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>un_trade_theil_processed <span class="ot">&lt;-</span> un_trade_theil<span class="sc">|&gt;</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">8</span>) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
+<p>Number of rows : 46108</p>
+<p>Number of columns : | 7</p>
 <p>Similarly the theil index database had some columns that were not relevant to our project so after processing the database and storing it in un_trade_theil_processed The table format is as follows :</p>
-<table class="caption-top table">
+<table class="caption-top">
 <colgroup>
-<col style="width: 13%">
-<col style="width: 13%">
-<col style="width: 13%">
+<col style="width: 7%">
 <col style="width: 11%">
-<col style="width: 13%">
-<col style="width: 11%">
-<col style="width: 11%">
-<col style="width: 11%">
+<col style="width: 19%">
+<col style="width: 7%">
+<col style="width: 15%">
+<col style="width: 10%">
+<col style="width: 18%">
+<col style="width: 9%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -296,38 +191,245 @@ lgl (1): Index Footnote
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
-<td>Number of rows :</td>
-<td>55290</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+</tbody>
+</table>
+<p>Number of rows : 55290</p>
+<p>Number of columns : 8</p>
+</section>
+<section id="cepii-baci" class="level3">
+<h3 class="anchored" data-anchor-id="cepii-baci">CEPII BACI :</h3>
+<p>The CEPII BACI database being too big to push into our repository, below is the link to download the datafile we will use for our project : https://www.cepii.fr/cepii/en/bdd_modele/bdd_modele_item.asp?id=37</p>
+<p>Note that we use the HS92 (1995-2024) datafile. Once the file downloaded, inside is the trade data file from 1995 to 2024 plus two additional files : -country_codes_V202601.csv -product_codes_HS92_V2026.csv these two files are already loaded into our repository.</p>
+<p>The BACII datasets use HS6 classification and these two files are the key to matching the datasets with our UN and IMF data.</p>
+<p>Each BACI file is composed as follows :</p>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>t</th>
+<th>i</th>
+<th>j</th>
+<th>k</th>
+<th>v</th>
+<th>q</th>
 </tr>
-<tr class="even">
-<td>Number of columns :</td>
-<td>8</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+</thead>
+<tbody>
+</tbody>
+</table>
+<p>Number of rows :</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 11016660</code></pre>
+</div>
+</div>
+<p>Number of columns :</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 6</code></pre>
+</div>
+</div>
+<p>where : - t represents Year</p>
+<ul>
+<li><p>i represents Exporter</p></li>
+<li><p>j represents Importer</p></li>
+<li><p>k represents Product category</p></li>
+<li><p>v represents Value of the trade flow (in thousands current USD)</p></li>
+<li><p>q represents Quantity (in metric tons)</p></li>
+</ul>
+<p>for a more detailed description of the methodology of this encoding we refer the reader to the official CEPII website : https://www.cepii.fr/DATA_DOWNLOAD/baci/doc/baci_webpage.html</p>
+<p>Once the data downloaded and added the Rproj locally, we recommend removing the commented code lines using the BACII datasets aand rerendering this document.</p>
+</section>
+</section>
+<section id="description-of-important-variables" class="level2">
+<h2 class="anchored" data-anchor-id="description-of-important-variables">Description of important variables</h2>
+<section id="weo-1" class="level3">
+<h3 class="anchored" data-anchor-id="weo-1">WEO</h3>
+<p>The first important variable from the WEO is the Gross domestic production (GDP) (in Billions of US dollars). It measures the production of a country. It will be the base of our analysis through output we can infer from it. The GDP in constant price (in Billions of domestic currency) will help us calculate the growth rate of the GDP. The Population (in millions) can help us measure the importance of the number of people while GDP per capita (in Billions of US dollars) the importance of the welfare of the inhabitants. The current account balance (in percent of GDP) helps us understand if the country is a lender or a borrower and in which proportion The gross debt (in percent of GDP) allows us to understand to what extent a country is indebted. The gross national savings (in percent of GDP) represent the part of the GDP that is not consumed. Finally the unemployment rate (in percent) measures the part of the population that is unemployed. All those variables can either explain the effect of an international shock on an economy.</p>
+</section>
+<section id="un-trade-and-development-2" class="level3">
+<h3 class="anchored" data-anchor-id="un-trade-and-development-2">UN Trade and development</h3>
+</section>
+</section>
+<section id="un-trade-data" class="level1">
+<h1>UN Trade data:</h1>
+<p>From this database we found that the foloowing variables were the most important for the rest of our project : - The trade quantity assosciated with each flow label either imports or exports - the percentage of the world trade that the flow label trade quantity of each corresponding country represents these variables will serve as the frist explonatory variables as well as the bricks to constructing some aggregat variables that we will explore all along the project such as the trade quantity contraction after a crisis as well as other aggregates like trade openess.</p>
+</section>
+<section id="un-theil-index-data" class="level1">
+<h1>UN theil index data:</h1>
+<p>This database covers essentially the theil index but it is important to note that the following categories of theil index will be used each for a different purpose : for Imports : - Overall Theil Index</p>
+<ul>
+<li><p>Product concentration Theil index</p></li>
+<li><p>Market (per product) concentration Theil index</p></li>
+</ul>
+<p>for Exports : - Overall Theil Index</p>
+<ul>
+<li><p>Product concentration Theil index</p></li>
+<li><p>Market (per product) concentration Theil index</p></li>
+</ul>
+</section>
+<section id="cepii-baci-1" class="level1">
+<h1>CEPII BACI :</h1>
+<p>The most important variables that we will use from this dataset are : - Product category</p>
+<ul>
+<li><p>Value of the trade flow</p></li>
+<li><p>the importing and exporting countries</p></li>
+</ul>
+<p>These variables will be necessary for the constrution of aggregate indicators such as the dependence of a country on its trading partners or even it’s exposure to foreign economic shocks.</p>
+<section id="research-question-description" class="level2">
+<h2 class="anchored" data-anchor-id="research-question-description">Research question description</h2>
+<p>The main goal of our project is to study the following economical question:</p>
+<p><strong>How does international trade and international openness affect a country’s resilience to a global crisis ?</strong></p>
+<p>We will focus on both developing and advanced economies and our goal is to understand what characteristics make some countries more “ resilient “ than others. We will try and determine indicators using R that can give better insight into the way each economy responds to crises.</p>
+<p>What motivates our project is the observation of the constant rise of globalization and the increasing link between countries, ever since the Second World War.</p>
+<p>Nowadays, importation and exportation are essential in most economies around the world. As beneficial as globalization has been, it also came with some issues. Countries have less control on their economies, as the outside world’s influence on prices inside the borders soar. Increase in tariff prices, pandemic (such as COVID-19) and geopolitical instability (such in the strait of Hormuz) affect economies all around the globe. However, we can notice that similar countries can have different reactions to a crisis. Some take years to recover while others hardly struggle. Our objective is to understand these differences through analyses on both variables describing the economy of the countries as well as data representing their international places (number of goods imported/exported, how many countries are traded with).</p>
+<p>This analysis will help us understand which place a country should aim to have in the world to have a growing economy, while keeping autonomy when facing a crisis.</p>
+<p>In a first step we will focus on the following two crises :</p>
+<ul>
+<li><p>2008 sub-prime financial crisis</p></li>
+<li><p>COVID 19 pandemic crisis</p></li>
+</ul>
+</section>
+<section id="merging-the-datasets" class="level2">
+<h2 class="anchored" data-anchor-id="merging-the-datasets">Merging the datasets</h2>
+<p>To merge the data sets we proceed as follows. :</p>
+<ul>
+<li>WEO + un_trade data :</li>
+</ul>
+<p>Since the WEO data set is already in cross country panel data form, we only need to pivot wider the un_trade data and then we use an inner_join and we join by the couple (Country,Year) so each row has the data for a conuntry i for a year t</p>
+<ul>
+<li>WEO + un_trade_theil :</li>
+</ul>
+<p>We proceed similarly for the un_trade_theil_index dataset.</p>
+</section>
+</section>
+<section id="summary-statistics" class="level1">
+<h1>Summary Statistics</h1>
+<p>In this section we compute some summary statistics for the merged data :</p>
+<ul>
+<li><p>number of countries.</p></li>
+<li><p>number of observations.</p></li>
+<li><p>the first year at which our observations start</p></li>
+<li><p>the last year of our observations</p></li>
+</ul>
+<p>We also Compute the trade openness indicator which is the percentage of trade,ie Exports plus Imports, in the country’s GDP at a given year t, using this data we compute the following statistics:</p>
+<p>-The average Trade openness of our observation sample</p>
+<p>-The Standard_Deviation of our observation sample</p>
+<p>-The Median of our observation sample</p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 29%">
+<col style="width: 23%">
+<col style="width: 22%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">n_countries_theil</th>
+<th style="text-align: right;">n_observations_theil</th>
+<th style="text-align: right;">year_start_theil</th>
+<th style="text-align: right;">year_last_theil</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">128</td>
+<td style="text-align: right;">3968</td>
+<td style="text-align: right;">1995</td>
+<td style="text-align: right;">2025</td>
 </tr>
 </tbody>
 </table>
+</div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 29%">
+<col style="width: 23%">
+<col style="width: 22%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">n_countries_trade</th>
+<th style="text-align: right;">n_observations_trade</th>
+<th style="text-align: right;">year_start_trade</th>
+<th style="text-align: right;">year_last_trade</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">128</td>
+<td style="text-align: right;">3968</td>
+<td style="text-align: right;">1995</td>
+<td style="text-align: right;">2025</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: right;">Average</th>
+<th style="text-align: right;">Standard_Deviation</th>
+<th style="text-align: right;">Median</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">64.22266</td>
+<td style="text-align: right;">37.51559</td>
+<td style="text-align: right;">55.80512</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </section>
-<section id="cepii-baci" class="level2">
-<h2 class="anchored" data-anchor-id="cepii-baci">CEPII BACI :</h2>
-<section id="description-of-important-variables" class="level3">
-<h3 class="anchored" data-anchor-id="description-of-important-variables">Description of important variables</h3>
+<section id="some-plots-that-motivates-our-research-question" class="level1">
+<h1>Some plots that motivates our research question</h1>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Data_Description_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Data_Description_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>What we can notice is that the more developped economies,ie the ones with the higher GDP per Capita tend to have a lower theil index in both imports and exports compared to countries with low level of GDP per capita so this suggests that trade diversification is positively correlated with a higher level of GDP per capita</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Data_Description_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Data_Description_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<section id="construction-of-gdp-growth" class="level3">
+<h3 class="anchored" data-anchor-id="construction-of-gdp-growth">Construction of GDP growth</h3>
 </section>
-</section>
-<section id="weo-1" class="level2">
-<h2 class="anchored" data-anchor-id="weo-1">WEO</h2>
-<p>The first important variable from the WEO is the Gross domestic production (GDP) (in Billions of US dollars). It measures the production of a country. It will be the base of our analysis through output we can infer from it. The Population (in millions) can help us measure the importance of the number of people while GDP per capita (in Billions of US dollars) the importance of the welfare of the inhabitants. The current account balance (in percent of GDP) helps us understand if the country is a lender or a borrower and in which proportion The gross debt (in percent of GDP) allows us to understand to what extent a country is indebted. The gross national savings (in percent of GDP) represent the part of the GDP that is not consumed. Finally the unemployment rate (in percent) measures the part of the population that is unemployed. All those variables can either explain the effect of an international shock on an economy.</p>
 </section>
 
 </main>
