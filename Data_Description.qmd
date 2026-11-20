@@ -2,6 +2,10 @@
 title: "Data_Description"
 author: "Ibrahim Khribch and Lucas Monnaert"
 format: html
+execute : 
+  echo: false
+  message: false
+  warning: false
 ---
 
 ```{r}
@@ -19,6 +23,8 @@ library(dplyr)
 https://github.com/ibrahimkhribch/Trade_Data_Management_Project
 
 ## Data Source Description
+
+First of all we would like to note that all the dataset that we are working with is public data and can be downloaded and used by anyone.
 
 ### WEO-IMF
 
@@ -100,7 +106,24 @@ WEO <- WEO |>
 #BACI_2020<-vroom(here("DATA/BACI_HS92_Y2020_V202601.csv"))
 #BACI_2021<-vroom(here("DATA/BACI_HS92_Y2021_V202601.csv"))
 #country_codes <- vroom(here("DATA/country_codes_V202601.csv"))
-#product_codes <- vroom(here("DATA/product_codes_HS92_V202601.csv"),delim = ",")
+#product_codes <- vroom(here("DATA/product_codes_HS92_V202601.csv"),delim = ",")|>
+  #mutate(code = as.integer(code))
+```
+
+### Construction of GDP growth
+
+```{r}
+WEO <- WEO |> 
+  arrange(COUNTRY,Year) |>
+  mutate(
+    Growth_rate=(Real_GDP-lag(Real_GDP))/lag(Real_GDP)
+    )
+
+for (i in 2:nrow(WEO)) {
+  if (WEO[[i,1]]!= WEO[[i-1,1]]) {
+    WEO[i,11] <- NA
+  }
+}
 ```
 
 ### WEO
@@ -108,8 +131,7 @@ WEO <- WEO |>
 `weo` was the original data set that we imported with `vroom`. We then removed the three first columns which corresponded to the data set, the series code and the type of measure since we didn't need them. The clean data set is stored in `WEO.`
 
 | Country | Indicator | Frequency | Scale | Year (1995-2025) |
-|---------|-----------|-----------|-------|------------------|
-|         |           |           |       |                  |
+|---------|-----------|-----------|-------|-------------------|
 
 Number of rows : `{r} nrow(WEO)`
 
@@ -119,7 +141,6 @@ Number of columns : `{r} ncol(WEO)`
 
 | Country | Indicator | Frequency | Scale | Year (1995-2025) |
 |---------|-----------|-----------|-------|------------------|
-|         |           |           |       |                  |
 
 Number of rows : `{r} nrow(WEO_Constant_Price)`
 
@@ -137,9 +158,11 @@ un_trade_processed <- un_trade |>
 The original data set Merchandise Trade Annual contained unecssary information for our project so after havinf proceesed the data file we stored it in un_trade_processed The table format is as follows :
 
 | Year | Economy | Economy Label | Flow | Flow Label | Millions of US\$ at current prices | percentage of total world |
-|-----------|-----------|-----------|-----------|-----------|-----------|-----------|
-| Number of rows : | `{r} nrow(un_trade_processed)` |  |  |  |  |  |
-| Number of columns : | `{r} ncol(un_trade_processed)` |  |  |  |  |  |
+|---------|-------------|-----------|---------|-----------|-------------|-----------|
+
+Number of rows : `{r} nrow(un_trade_processed)`
+
+Number of columns : \| `{r} ncol(un_trade_processed)`
 
 ```{r}
 un_trade_theil_processed <- un_trade_theil|>
@@ -150,45 +173,92 @@ un_trade_theil_processed <- un_trade_theil|>
 Similarly the theil index database had some columns that were not relevant to our project so after processing the database and storing it in un_trade_theil_processed The table format is as follows :
 
 | Year | Economy | Economy Label | Flow | Flow Label | Series | Series label | index |
-|---------|---------|---------|---------|---------|---------|---------|---------|
-| Number of rows : | `{r} nrow(un_trade_theil_processed)` |  |  |  |  |  |  |
-| Number of columns : | `{r} ncol(un_trade_theil_processed)` |  |  |  |  |  |  |
+|------|---------|---------------|------|------------|--------|--------------|-------|
+
+Number of rows : `{r} nrow(un_trade_theil_processed)`
+
+Number of columns : `{r} ncol(un_trade_theil_processed)`
 
 ### CEPII BACI :
+
+The CEPII BACI database being too big to push into our repository, below is the link to download the datafile we will use for our project : https://www.cepii.fr/cepii/en/bdd_modele/bdd_modele_item.asp?id=37
+
+Note that we use the HS92 (1995-2024) datafile. Once the file downloaded, inside is the trade data file from 1995 to 2024 plus two additional files : -country_codes_V202601.csv -product_codes_HS92_V2026.csv these two files are already loaded into our repository.
+
+The BACII datasets use HS6 classification and these two files are the key to matching the datasets with our UN and IMF data.
+
+Each BACI file is composed as follows :
+
+| t   | i   | j   | k   | v   | q   |
+|------|------|------|------|------|------|
+
+Number of rows :
+
+```{r}
+#nrow(BACI_2019)
+```
+
+Number of columns :
+
+```{r}
+#ncol(BACI_2019)
+```
+
+where : - t represents Year
+
+- i represents Exporter
+
+- j represents Importer
+
+- k represents Product category
+
+- v represents Value of the trade flow (in thousands current USD)
+
+- q represents Quantity (in metric tons)
+
+for a more detailed description of the methodology of this encoding we refer the reader to the official CEPII website :
+
+https://www.cepii.fr/DATA_DOWNLOAD/baci/doc/baci_webpage.html
+
+Once the data downloaded and added the Rproj locally, we recommend removing the commented code lines using the BACII datasets aand rerendering this document.
+
+In the rest of the project before any code using the BACI datasets we will indicate which year file we are using so as to avoid having to load the 29 files. 
 
 ## Description of important variables
 
 ### WEO
 
-The first important variable from the WEO is the Gross domestic production (GDP) (in Billions of US dollars). It measures the production of a country. It will be the base of our analysis through output we can infer from it. 
-The GDP in constant price (in Billions of domestic currency) will help us calculate the growth rate of the GDP.
-The Population (in millions) can help us measure the importance of the number of people while GDP per capita (in Billions of US dollars) the importance of the welfare of the inhabitants. 
-The current account balance (in percent of GDP) helps us understand if the country is a lender or a borrower and in which proportion 
-The gross debt (in percent of GDP) allows us to understand to what extent a country is indebted. 
-The gross national savings (in percent of GDP) represent the part of the GDP that is not consumed. 
-Finally the unemployment rate (in percent) measures the part of the population that is unemployed. All those variables can either explain the effect of an international shock on an economy.
+The first important variable from the WEO is the Gross domestic production (GDP) (in Billions of US dollars). It measures the production of a country. It will be the base of our analysis through output we can infer from it. The GDP in constant price (in Billions of domestic currency) will help us calculate the growth rate of the GDP. The Population (in millions) can help us measure the importance of the number of people while GDP per capita (in Billions of US dollars) the importance of the welfare of the inhabitants. The current account balance (in percent of GDP) helps us understand if the country is a lender or a borrower and in which proportion The gross debt (in percent of GDP) allows us to understand to what extent a country is indebted. The gross national savings (in percent of GDP) represent the part of the GDP that is not consumed. Finally the unemployment rate (in percent) measures the part of the population that is unemployed. All those variables can either explain the effect of an international shock on an economy.
 
 ### UN Trade and development
-# UN Trade data: 
 
-From this database we found that the foloowing variables were the most important for the rest of our project : 
-  - The trade quantity assosciated with each flow label either imports or exports 
-  - the percentage of the world trade that the flow label trade quantity of each corresponding country represents 
-these variables will serve as the frist explonatory variables as well as the bricks to constructing some aggregat variables that we will explore all along the project such as the trade quantity contraction after a crisis as well as other aggregates like trade openess. 
+# UN Trade data:
 
-# UN theil index data: 
-This database covers essentially the theil index but it is important to note that the following categories of theil index will be used each for a different purpose : 
-  for Imports : 
-    - Overall Theil Index
-    - Product concentration Theil index
-    - Market (per product) concentration Theil index
-    
-  for Exports : 
-    - Overall Theil Index
-    - Product concentration Theil index
-    - Market (per product) concentration Theil index
+From this database we found that the foloowing variables were the most important for the rest of our project : - The trade quantity assosciated with each flow label either imports or exports - the percentage of the world trade that the flow label trade quantity of each corresponding country represents these variables will serve as the frist explonatory variables as well as the bricks to constructing some aggregat variables that we will explore all along the project such as the trade quantity contraction after a crisis as well as other aggregates like trade openess.
 
-# CEPII BACI : 
+# UN theil index data:
+
+This database covers essentially the theil index but it is important to note that the following categories of theil index will be used each for a different purpose : for Imports : - Overall Theil Index
+
+- Product concentration Theil index
+
+- Market (per product) concentration Theil index
+
+for Exports : - Overall Theil Index
+
+- Product concentration Theil index
+
+- Market (per product) concentration Theil index
+
+# CEPII BACI :
+
+The most important variables that we will use from this dataset are : - Product category
+
+- Value of the trade flow
+
+- the importing and exporting countries
+
+These variables will be necessary for the constrution of aggregate indicators such as the dependence of a country on its trading partners or even it's exposure to foreign economic shocks.
 
 ## Research question description
 
@@ -198,13 +268,33 @@ The main goal of our project is to study the following economical question:
 
 We will focus on both developing and advanced economies and our goal is to understand what characteristics make some countries more “ resilient “ than others. We will try and determine indicators using R that can give better insight into the way each economy responds to crises.
 
-What motivates our project is the observation of the constant rise of globalization and the increasing link between countries, ever since the Second World War. 
+What motivates our project is the observation of the constant rise of globalization and the increasing link between countries, ever since the Second World War.
 
 Nowadays, importation and exportation are essential in most economies around the world. As beneficial as globalization has been, it also came with some issues. Countries have less control on their economies, as the outside world's influence on prices inside the borders soar. Increase in tariff prices, pandemic (such as COVID-19) and geopolitical instability (such in the strait of Hormuz) affect economies all around the globe. However, we can notice that similar countries can have different reactions to a crisis. Some take years to recover while others hardly struggle. Our objective is to understand these differences through analyses on both variables describing the economy of the countries as well as data representing their international places (number of goods imported/exported, how many countries are traded with).
 
 This analysis will help us understand which place a country should aim to have in the world to have a growing economy, while keeping autonomy when facing a crisis.
 
-## Merging the datasets 
+In a first step we will focus on the following two crises :
+
+- 2008 sub-prime financial crisis
+
+- COVID 19 pandemic crisis
+
+## Merging the datasets
+
+To merge the data sets we proceed as follows. :
+
+- WEO + un_trade data :
+
+Since the WEO data set is already in cross country panel data form, we only need to pivot wider the un_trade data and then we use an inner_join and we join by the couple (Country,Year) so each row has the data for a conuntry i for a year t
+
+- WEO + un_trade_theil :
+
+We proceed similarly for the un_trade_theil_index dataset.
+
+- BACII : 
+For this dataset we first start by matching the i, j and the product codes to the the two csvs containing these informations, once this step is done we simply join based on the country and year. 
+We note that give the subsetential number of datasets and observations of these datasets we will join the BACI datasets to the WEO progressively, meaning that as the project evolves and as our need for data for certain periods is necesary only then will we do these join operations, it is in our view a more sensible approach.
 
 ```{r}
 theil_wide <- un_trade_theil_processed |>
@@ -218,7 +308,6 @@ data_macro_theil <- WEO |>
   inner_join(theil_wide,by=join_by(COUNTRY,Year))
 
 ```
-
 
 ```{r}
 # we now merge the theil database and WEO 
@@ -234,28 +323,89 @@ data_macro_trade <- WEO |>
 ```
 
 ```{r}
-# decoding the BACII dataset
+# decoding the pre covid crisis BACII dataset fo the countries
+#BACI_2019 <- BACI_2019 |>
+  #left_join(country_codes,by=join_by(i==country_code))|>
+  #rename(Exporter = country_name)|>
+  #left_join(country_codes,by=join_by(j==country_code))|>
+  #rename(Importer = country_name)|>
+  #select(t,Exporter,Importer,k,v,q)|>
+  #rename(Year=t)
 
+
+# joining WEO to BACI for the pre covid crisis year
+#data_weo_baci_2019 <- WEO |>
+  #inner_join(BACI_2019,by=join_by(COUNTRY==Exporter, Year))
+  
+
+#BACI 2020 
+#BACI_2020 <- BACI_2020 |>
+  #left_join(country_codes,by=join_by(i==country_code))|>
+  #rename(Exporter = country_name)|>
+  #left_join(country_codes,by=join_by(j==country_code))|>
+  #rename(Importer = country_name)|>
+  #select(t,Exporter,Importer,k,v,q)|>
+  #rename(Year=t)
+#BACI 2021
+#BACI_2021 <- BACI_2021 |>
+  #left_join(country_codes,by=join_by(i==country_code))|>
+  #rename(Exporter = country_name)|>
+  #left_join(country_codes,by=join_by(j==country_code))|>
+  #rename(Importer = country_name)|>
+  #select(t,Exporter,Importer,k,v,q)|>
+  #rename(Year=t)
+#we bind the datasets to create a synthetic dataset of pre-covid, during covis and post covid
+#BACI_covid <- 
+  #bind_rows(
+    #BACI_2019,
+    #BACI_2020,
+    #BACI_2021
+  #)
 ```
 
-# Summary Statistics 
+# Summary Statistics
+
+In this section we compute some summary statistics for the merged data :
+
+- number of countries.
+
+- number of observations.
+
+- the first year at which our observations start
+
+- the last year of our observations
+
 ```{r}
 
 data_macro_theil |>
   summarise(
-    n_countries = n_distinct(COUNTRY),
-    n_observations = n(),
-    year_start = min(Year),
-    year_last = max(Year)
-  )
+    n_countries_theil = n_distinct(COUNTRY),
+    n_observations_theil = n(),
+    year_start_theil = min(Year),
+    year_last_theil = max(Year)
+  )|>
+knitr::kable()
 
 data_macro_trade |>
   summarise(
-    n_countries = n_distinct(COUNTRY),
-    n_observations = n(),
-    year_start = min(Year),
-    year_last = max(Year)
-  )
+    n_countries_trade = n_distinct(COUNTRY),
+    n_observations_trade = n(),
+    year_start_trade = min(Year),
+    year_last_trade = max(Year)
+  )|>
+knitr::kable()
+
+```
+
+We also Compute the trade openness indicator which is the percentage of trade,ie Exports plus Imports, in the country's GDP at a given year t, using this data we compute the following statistics:
+
+-The average Trade openness of our observation sample
+
+-The Standard_Deviation of our observation sample
+
+-The Median of our observation sample
+
+```{r}
 
 trade_openess <- data_macro_trade |>
   mutate (
@@ -269,8 +419,26 @@ trade_openess |>
     Average = mean(openess),
     Standard_Deviation = sd(openess),
     Median = median(openess)
-  )
+  )|>
+knitr::kable()
 
+#data_weo_baci_2019 |>
+  #summarise(
+    #n_countries_BACI_pre = n_distinct(COUNTRY)
+  #)|>
+  #knitr::kable()
+  
+
+#data_weo_baci_2019 |>
+ #group_by(COUNTRY)|>
+  #summarise(
+    #n_product = n_distinct(k),
+    #n_partners = n_distinct(Importer),
+    #max_trade_value = max(v),
+    #min_trade_value = min(v)
+  #)|>
+  #slice_sample(n=6)|>
+#knitr::kable()
 
 
 ```
@@ -285,6 +453,7 @@ data_macro_theil|>
   ggplot(aes(x=`Gross domestic product (GDP), Current prices, Per capita, US dollar` ,y=`Exports_Overall Theil Index`,color=factor(Year)))+
   geom_point(alpha=0.5)
 ```
+
 ```{r}
 #GDP per capita as a function of Imports theil index before during and after the COVID pandemic crisis
 data_macro_theil|>
@@ -293,6 +462,7 @@ data_macro_theil|>
   ggplot(aes(x=`Gross domestic product (GDP), Current prices, Per capita, US dollar` ,y=`Imports_Overall Theil Index`,color=factor(Year)))+
   geom_point(alpha=0.5)
 ```
+
 What we can notice is that the more developped economies,ie the ones with the higher GDP per Capita tend to have a lower theil index in both imports and exports compared to countries with low level of GDP per capita so this suggests that trade diversification is positively correlated with a higher level of GDP per capita
 
 ```{r}
@@ -304,12 +474,8 @@ data_macro_trade|>
   geom_point(alpha=0.2)+
   facet_wrap(~Year)
 ```
-
-
-
 ```{r}
 #GDP as a function of Trade openess before during and after the COVID pandemic crisis
-
 
 trade_openess |>
   filter(Year%in%c(2019,2020,2021) )|>
@@ -317,20 +483,12 @@ trade_openess |>
   geom_point(alpha=0.5)+
   facet_wrap(~Year)
 ```
-
-### Construction of GDP growth
-
 ```{r}
-WEO <- WEO |> 
-  arrange(COUNTRY,Year) |>
-  mutate(
-    Growth_rate=(Real_GDP-lag(Real_GDP))/lag(Real_GDP)
-    )
-
-for (i in 2:nrow(WEO)) {
-  if (WEO[[i,1]]!= WEO[[i-1,1]]) {
-    WEO[i,11] <- NA
-  }
-}
+#evolution of real GDP_growth as a function of trade openness 
+trade_openess |>
+  filter(Year%in%c(2019,2020,2021) )|>
+  ggplot(aes(y=100*Growth_rate ,x=openess,color=factor(Year)))+
+  geom_point(alpha=0.5)+
+  facet_wrap(~Year)
 ```
 
