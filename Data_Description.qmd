@@ -110,6 +110,22 @@ WEO <- WEO |>
   #mutate(code = as.integer(code))
 ```
 
+### Construction of GDP growth
+
+```{r}
+WEO <- WEO |> 
+  arrange(COUNTRY,Year) |>
+  mutate(
+    Growth_rate=(Real_GDP-lag(Real_GDP))/lag(Real_GDP)
+    )
+
+for (i in 2:nrow(WEO)) {
+  if (WEO[[i,1]]!= WEO[[i-1,1]]) {
+    WEO[i,11] <- NA
+  }
+}
+```
+
 ### WEO
 
 `weo` was the original data set that we imported with `vroom`. We then removed the three first columns which corresponded to the data set, the series code and the type of measure since we didn't need them. The clean data set is stored in `WEO.`
@@ -319,8 +335,32 @@ data_macro_trade <- WEO |>
 
 # joining WEO to BACI for the pre covid crisis year
 #data_weo_baci_2019 <- WEO |>
- # inner_join(BACI_2019,by=join_by(COUNTRY==Exporter, Year))
+  #inner_join(BACI_2019,by=join_by(COUNTRY==Exporter, Year))
   
+
+#BACI 2020 
+#BACI_2020 <- BACI_2020 |>
+  #left_join(country_codes,by=join_by(i==country_code))|>
+  #rename(Exporter = country_name)|>
+  #left_join(country_codes,by=join_by(j==country_code))|>
+  #rename(Importer = country_name)|>
+  #select(t,Exporter,Importer,k,v,q)|>
+  #rename(Year=t)
+#BACI 2021
+#BACI_2021 <- BACI_2021 |>
+  #left_join(country_codes,by=join_by(i==country_code))|>
+  #rename(Exporter = country_name)|>
+  #left_join(country_codes,by=join_by(j==country_code))|>
+  #rename(Importer = country_name)|>
+  #select(t,Exporter,Importer,k,v,q)|>
+  #rename(Year=t)
+#we bind the datasets to create a synthetic dataset of pre-covid, during covis and post covid
+#BACI_covid <- 
+  #bind_rows(
+    #BACI_2019,
+    #BACI_2020,
+    #BACI_2021
+  #)
 ```
 
 # Summary Statistics
@@ -378,21 +418,22 @@ trade_openess |>
   )|>
 knitr::kable()
 
-data_weo_baci_2019 |>
-  summarise(
-    n_countries_BACI_pre = n_distinct(COUNTRY)
-  )|>
-  knitr::kable()
+#data_weo_baci_2019 |>
+  #summarise(
+    #n_countries_BACI_pre = n_distinct(COUNTRY)
+  #)|>
+  #knitr::kable()
   
 
 #data_weo_baci_2019 |>
- # group_by(COUNTRY)|>
+ #group_by(COUNTRY)|>
   #summarise(
-   # n_product = n_distinct(k),
+    #n_product = n_distinct(k),
     #n_partners = n_distinct(Importer),
     #max_trade_value = max(v),
     #min_trade_value = min(v)
   #)|>
+  #slice_sample(n=6)|>
 #knitr::kable()
 
 
@@ -432,26 +473,18 @@ data_macro_trade|>
 ```{r}
 #GDP as a function of Trade openess before during and after the COVID pandemic crisis
 
-
 trade_openess |>
   filter(Year%in%c(2019,2020,2021) )|>
   ggplot(aes(x=`Gross domestic product (GDP), Current prices, Per capita, US dollar` ,y=openess,color=factor(Year)))+
   geom_point(alpha=0.5)+
   facet_wrap(~Year)
 ```
-
-### Construction of GDP growth
-
 ```{r}
-WEO <- WEO |> 
-  arrange(COUNTRY,Year) |>
-  mutate(
-    Growth_rate=(Real_GDP-lag(Real_GDP))/lag(Real_GDP)
-    )
-
-for (i in 2:nrow(WEO)) {
-  if (WEO[[i,1]]!= WEO[[i-1,1]]) {
-    WEO[i,11] <- NA
-  }
-}
+#evolution of real GDP_growth as a function of trade openness 
+trade_openess |>
+  filter(Year%in%c(2019,2020,2021) )|>
+  ggplot(aes(y=100*Growth_rate ,x=openess,color=factor(Year)))+
+  geom_point(alpha=0.5)+
+  facet_wrap(~Year)
 ```
+

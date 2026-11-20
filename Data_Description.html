@@ -95,17 +95,13 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="data-sets-description-table" class="level2">
 <h2 class="anchored" data-anchor-id="data-sets-description-table">Data sets Description table</h2>
+<section id="construction-of-gdp-growth" class="level3">
+<h3 class="anchored" data-anchor-id="construction-of-gdp-growth">Construction of GDP growth</h3>
+</section>
 <section id="weo" class="level3">
 <h3 class="anchored" data-anchor-id="weo">WEO</h3>
 <p><code>weo</code> was the original data set that we imported with <code>vroom</code>. We then removed the three first columns which corresponded to the data set, the series code and the type of measure since we didn’t need them. The clean data set is stored in <code>WEO.</code></p>
 <table class="caption-top">
-<colgroup>
-<col style="width: 16%">
-<col style="width: 19%">
-<col style="width: 19%">
-<col style="width: 12%">
-<col style="width: 32%">
-</colgroup>
 <thead>
 <tr class="header">
 <th>Country</th>
@@ -119,7 +115,7 @@ ul.task-list li input[type="checkbox"] {
 </tbody>
 </table>
 <p>Number of rows : 6076</p>
-<p>Number of columns : 10</p>
+<p>Number of columns : 11</p>
 <p><code>WEO_Constant_Price</code> is the data set with the GDP in constant price.</p>
 <table class="caption-top">
 <thead>
@@ -140,15 +136,15 @@ ul.task-list li input[type="checkbox"] {
 <section id="un-trade-and-development-1" class="level3">
 <h3 class="anchored" data-anchor-id="un-trade-and-development-1">UN Trade and development</h3>
 <p>The original data set Merchandise Trade Annual contained unecssary information for our project so after havinf proceesed the data file we stored it in un_trade_processed The table format is as follows :</p>
-<table class="caption-top">
+<table class="caption-top" style="width:100%;">
 <colgroup>
-<col style="width: 12%">
-<col style="width: 12%">
-<col style="width: 12%">
-<col style="width: 12%">
-<col style="width: 12%">
-<col style="width: 15%">
-<col style="width: 20%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -217,17 +213,7 @@ ul.task-list li input[type="checkbox"] {
 </tbody>
 </table>
 <p>Number of rows :</p>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 11016660</code></pre>
-</div>
-</div>
 <p>Number of columns :</p>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 6</code></pre>
-</div>
-</div>
 <p>where : - t represents Year</p>
 <ul>
 <li><p>i represents Exporter</p></li>
@@ -236,8 +222,10 @@ ul.task-list li input[type="checkbox"] {
 <li><p>v represents Value of the trade flow (in thousands current USD)</p></li>
 <li><p>q represents Quantity (in metric tons)</p></li>
 </ul>
-<p>for a more detailed description of the methodology of this encoding we refer the reader to the official CEPII website : https://www.cepii.fr/DATA_DOWNLOAD/baci/doc/baci_webpage.html</p>
+<p>for a more detailed description of the methodology of this encoding we refer the reader to the official CEPII website :</p>
+<p>https://www.cepii.fr/DATA_DOWNLOAD/baci/doc/baci_webpage.html</p>
 <p>Once the data downloaded and added the Rproj locally, we recommend removing the commented code lines using the BACII datasets aand rerendering this document.</p>
+<p>In the rest of the project before any code using the BACI datasets we will indicate which year file we are using so as to avoid having to load the 29 files.</p>
 </section>
 </section>
 <section id="description-of-important-variables" class="level2">
@@ -300,6 +288,9 @@ ul.task-list li input[type="checkbox"] {
 <li>WEO + un_trade_theil :</li>
 </ul>
 <p>We proceed similarly for the un_trade_theil_index dataset.</p>
+<ul>
+<li>BACII : For this dataset we first start by matching the i, j and the product codes to the the two csvs containing these informations, once this step is done we simply join based on the country and year. We note that give the subsetential number of datasets and observations of these datasets we will join the BACI datasets to the WEO progressively, meaning that as the project evolves and as our need for data for certain periods is necesary only then will we do these join operations, it is in our view a more sensible approach.</li>
+</ul>
 </section>
 </section>
 <section id="summary-statistics" class="level1">
@@ -379,9 +370,913 @@ ul.task-list li input[type="checkbox"] {
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: right;">64.22266</td>
-<td style="text-align: right;">37.51559</td>
-<td style="text-align: right;">55.80512</td>
+<td style="text-align: right;">64.25947</td>
+<td style="text-align: right;">37.3357</td>
+<td style="text-align: right;">55.92448</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: right;">n_countries_BACI_pre</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">124</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 28%">
+<col style="width: 13%">
+<col style="width: 14%">
+<col style="width: 21%">
+<col style="width: 21%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">COUNTRY</th>
+<th style="text-align: right;">n_product</th>
+<th style="text-align: right;">n_partners</th>
+<th style="text-align: right;">max_trade_value</th>
+<th style="text-align: right;">min_trade_value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Albania</td>
+<td style="text-align: right;">2237</td>
+<td style="text-align: right;">143</td>
+<td style="text-align: right;">190923.764</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Algeria</td>
+<td style="text-align: right;">1784</td>
+<td style="text-align: right;">135</td>
+<td style="text-align: right;">2728828.479</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Angola</td>
+<td style="text-align: right;">2573</td>
+<td style="text-align: right;">156</td>
+<td style="text-align: right;">22477563.412</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Antigua and Barbuda</td>
+<td style="text-align: right;">1449</td>
+<td style="text-align: right;">129</td>
+<td style="text-align: right;">105474.913</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Argentina</td>
+<td style="text-align: right;">3591</td>
+<td style="text-align: right;">178</td>
+<td style="text-align: right;">3049154.396</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Australia</td>
+<td style="text-align: right;">4482</td>
+<td style="text-align: right;">213</td>
+<td style="text-align: right;">59108604.146</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Austria</td>
+<td style="text-align: right;">4538</td>
+<td style="text-align: right;">213</td>
+<td style="text-align: right;">2286509.959</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Bangladesh</td>
+<td style="text-align: right;">2589</td>
+<td style="text-align: right;">167</td>
+<td style="text-align: right;">1506384.600</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Barbados</td>
+<td style="text-align: right;">1990</td>
+<td style="text-align: right;">146</td>
+<td style="text-align: right;">39750.876</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Belgium</td>
+<td style="text-align: right;">4586</td>
+<td style="text-align: right;">219</td>
+<td style="text-align: right;">6717827.022</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Belize</td>
+<td style="text-align: right;">1321</td>
+<td style="text-align: right;">132</td>
+<td style="text-align: right;">53467.233</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Benin</td>
+<td style="text-align: right;">1407</td>
+<td style="text-align: right;">124</td>
+<td style="text-align: right;">453265.671</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Bhutan</td>
+<td style="text-align: right;">723</td>
+<td style="text-align: right;">89</td>
+<td style="text-align: right;">127939.754</td>
+<td style="text-align: right;">0.002</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Botswana</td>
+<td style="text-align: right;">2613</td>
+<td style="text-align: right;">120</td>
+<td style="text-align: right;">1023343.996</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Brazil</td>
+<td style="text-align: right;">4401</td>
+<td style="text-align: right;">221</td>
+<td style="text-align: right;">20798879.948</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Brunei Darussalam</td>
+<td style="text-align: right;">2092</td>
+<td style="text-align: right;">128</td>
+<td style="text-align: right;">2263220.810</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Bulgaria</td>
+<td style="text-align: right;">4446</td>
+<td style="text-align: right;">199</td>
+<td style="text-align: right;">603855.092</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Burkina Faso</td>
+<td style="text-align: right;">1454</td>
+<td style="text-align: right;">131</td>
+<td style="text-align: right;">1717926.855</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Burundi</td>
+<td style="text-align: right;">958</td>
+<td style="text-align: right;">109</td>
+<td style="text-align: right;">143309.785</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Cabo Verde</td>
+<td style="text-align: right;">1253</td>
+<td style="text-align: right;">117</td>
+<td style="text-align: right;">38325.849</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Cambodia</td>
+<td style="text-align: right;">2202</td>
+<td style="text-align: right;">177</td>
+<td style="text-align: right;">1914220.817</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Cameroon</td>
+<td style="text-align: right;">2309</td>
+<td style="text-align: right;">165</td>
+<td style="text-align: right;">464865.840</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Canada</td>
+<td style="text-align: right;">4503</td>
+<td style="text-align: right;">216</td>
+<td style="text-align: right;">66280138.887</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Chad</td>
+<td style="text-align: right;">483</td>
+<td style="text-align: right;">98</td>
+<td style="text-align: right;">451197.175</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Chile</td>
+<td style="text-align: right;">3734</td>
+<td style="text-align: right;">189</td>
+<td style="text-align: right;">9718766.046</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Colombia</td>
+<td style="text-align: right;">3827</td>
+<td style="text-align: right;">191</td>
+<td style="text-align: right;">5314121.229</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Costa Rica</td>
+<td style="text-align: right;">3379</td>
+<td style="text-align: right;">174</td>
+<td style="text-align: right;">811577.986</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Cyprus</td>
+<td style="text-align: right;">3523</td>
+<td style="text-align: right;">196</td>
+<td style="text-align: right;">351767.143</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Denmark</td>
+<td style="text-align: right;">4513</td>
+<td style="text-align: right;">215</td>
+<td style="text-align: right;">4888034.009</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Djibouti</td>
+<td style="text-align: right;">553</td>
+<td style="text-align: right;">83</td>
+<td style="text-align: right;">26305.084</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Dominica</td>
+<td style="text-align: right;">982</td>
+<td style="text-align: right;">122</td>
+<td style="text-align: right;">18600.744</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Ecuador</td>
+<td style="text-align: right;">2798</td>
+<td style="text-align: right;">177</td>
+<td style="text-align: right;">4063201.134</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">El Salvador</td>
+<td style="text-align: right;">3058</td>
+<td style="text-align: right;">154</td>
+<td style="text-align: right;">507778.242</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Finland</td>
+<td style="text-align: right;">4390</td>
+<td style="text-align: right;">212</td>
+<td style="text-align: right;">2021348.684</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">France</td>
+<td style="text-align: right;">4611</td>
+<td style="text-align: right;">219</td>
+<td style="text-align: right;">8397784.162</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Gabon</td>
+<td style="text-align: right;">1696</td>
+<td style="text-align: right;">159</td>
+<td style="text-align: right;">3390154.798</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Georgia</td>
+<td style="text-align: right;">2895</td>
+<td style="text-align: right;">168</td>
+<td style="text-align: right;">314008.011</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Germany</td>
+<td style="text-align: right;">4606</td>
+<td style="text-align: right;">224</td>
+<td style="text-align: right;">14113777.418</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Ghana</td>
+<td style="text-align: right;">2937</td>
+<td style="text-align: right;">173</td>
+<td style="text-align: right;">2391845.097</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Greece</td>
+<td style="text-align: right;">4419</td>
+<td style="text-align: right;">210</td>
+<td style="text-align: right;">1293169.365</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Grenada</td>
+<td style="text-align: right;">889</td>
+<td style="text-align: right;">94</td>
+<td style="text-align: right;">3705.502</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Guatemala</td>
+<td style="text-align: right;">3563</td>
+<td style="text-align: right;">172</td>
+<td style="text-align: right;">1015637.473</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Guinea</td>
+<td style="text-align: right;">1117</td>
+<td style="text-align: right;">121</td>
+<td style="text-align: right;">2455006.047</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Guinea-Bissau</td>
+<td style="text-align: right;">235</td>
+<td style="text-align: right;">59</td>
+<td style="text-align: right;">122262.864</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Guyana</td>
+<td style="text-align: right;">1599</td>
+<td style="text-align: right;">126</td>
+<td style="text-align: right;">380698.946</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Haiti</td>
+<td style="text-align: right;">1251</td>
+<td style="text-align: right;">133</td>
+<td style="text-align: right;">297647.510</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Honduras</td>
+<td style="text-align: right;">2691</td>
+<td style="text-align: right;">157</td>
+<td style="text-align: right;">606276.745</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Hungary</td>
+<td style="text-align: right;">4450</td>
+<td style="text-align: right;">206</td>
+<td style="text-align: right;">1809800.468</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Iceland</td>
+<td style="text-align: right;">2398</td>
+<td style="text-align: right;">172</td>
+<td style="text-align: right;">627230.827</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">India</td>
+<td style="text-align: right;">4575</td>
+<td style="text-align: right;">220</td>
+<td style="text-align: right;">8616237.801</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Indonesia</td>
+<td style="text-align: right;">4436</td>
+<td style="text-align: right;">212</td>
+<td style="text-align: right;">6170316.503</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Iraq</td>
+<td style="text-align: right;">1323</td>
+<td style="text-align: right;">115</td>
+<td style="text-align: right;">23850151.714</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Ireland</td>
+<td style="text-align: right;">4350</td>
+<td style="text-align: right;">206</td>
+<td style="text-align: right;">12702846.211</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Israel</td>
+<td style="text-align: right;">3974</td>
+<td style="text-align: right;">161</td>
+<td style="text-align: right;">6740232.748</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Italy</td>
+<td style="text-align: right;">4615</td>
+<td style="text-align: right;">225</td>
+<td style="text-align: right;">5415407.342</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Jamaica</td>
+<td style="text-align: right;">2133</td>
+<td style="text-align: right;">161</td>
+<td style="text-align: right;">298719.970</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Japan</td>
+<td style="text-align: right;">4522</td>
+<td style="text-align: right;">213</td>
+<td style="text-align: right;">25107690.749</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Jordan</td>
+<td style="text-align: right;">2907</td>
+<td style="text-align: right;">170</td>
+<td style="text-align: right;">450461.837</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Kenya</td>
+<td style="text-align: right;">3634</td>
+<td style="text-align: right;">189</td>
+<td style="text-align: right;">399192.667</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Kiribati</td>
+<td style="text-align: right;">279</td>
+<td style="text-align: right;">44</td>
+<td style="text-align: right;">71769.971</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Kuwait</td>
+<td style="text-align: right;">2980</td>
+<td style="text-align: right;">160</td>
+<td style="text-align: right;">10814354.276</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Lebanon</td>
+<td style="text-align: right;">3383</td>
+<td style="text-align: right;">181</td>
+<td style="text-align: right;">1056868.196</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Liberia</td>
+<td style="text-align: right;">1030</td>
+<td style="text-align: right;">114</td>
+<td style="text-align: right;">148549.458</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Libya</td>
+<td style="text-align: right;">617</td>
+<td style="text-align: right;">92</td>
+<td style="text-align: right;">7913976.939</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Luxembourg</td>
+<td style="text-align: right;">4262</td>
+<td style="text-align: right;">200</td>
+<td style="text-align: right;">206048.771</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Malawi</td>
+<td style="text-align: right;">1582</td>
+<td style="text-align: right;">143</td>
+<td style="text-align: right;">86550.356</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Malaysia</td>
+<td style="text-align: right;">4428</td>
+<td style="text-align: right;">214</td>
+<td style="text-align: right;">23048841.046</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Maldives</td>
+<td style="text-align: right;">834</td>
+<td style="text-align: right;">92</td>
+<td style="text-align: right;">48791.155</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Mali</td>
+<td style="text-align: right;">1693</td>
+<td style="text-align: right;">152</td>
+<td style="text-align: right;">3218691.767</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Malta</td>
+<td style="text-align: right;">3524</td>
+<td style="text-align: right;">190</td>
+<td style="text-align: right;">178290.466</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Mauritius</td>
+<td style="text-align: right;">3098</td>
+<td style="text-align: right;">173</td>
+<td style="text-align: right;">105166.795</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Mexico</td>
+<td style="text-align: right;">4288</td>
+<td style="text-align: right;">178</td>
+<td style="text-align: right;">25325454.156</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Mongolia</td>
+<td style="text-align: right;">1539</td>
+<td style="text-align: right;">116</td>
+<td style="text-align: right;">2935218.471</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Montenegro</td>
+<td style="text-align: right;">1983</td>
+<td style="text-align: right;">121</td>
+<td style="text-align: right;">55008.194</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Morocco</td>
+<td style="text-align: right;">3622</td>
+<td style="text-align: right;">189</td>
+<td style="text-align: right;">1862584.882</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Myanmar</td>
+<td style="text-align: right;">2366</td>
+<td style="text-align: right;">173</td>
+<td style="text-align: right;">2456243.247</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Namibia</td>
+<td style="text-align: right;">3221</td>
+<td style="text-align: right;">181</td>
+<td style="text-align: right;">523679.630</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Nepal</td>
+<td style="text-align: right;">1816</td>
+<td style="text-align: right;">141</td>
+<td style="text-align: right;">195648.097</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">New Zealand</td>
+<td style="text-align: right;">4186</td>
+<td style="text-align: right;">215</td>
+<td style="text-align: right;">1972807.833</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Nicaragua</td>
+<td style="text-align: right;">2462</td>
+<td style="text-align: right;">155</td>
+<td style="text-align: right;">476891.741</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Niger</td>
+<td style="text-align: right;">1295</td>
+<td style="text-align: right;">152</td>
+<td style="text-align: right;">457014.681</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Nigeria</td>
+<td style="text-align: right;">3043</td>
+<td style="text-align: right;">170</td>
+<td style="text-align: right;">9449149.226</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Norway</td>
+<td style="text-align: right;">4075</td>
+<td style="text-align: right;">211</td>
+<td style="text-align: right;">11168207.286</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Oman</td>
+<td style="text-align: right;">3424</td>
+<td style="text-align: right;">168</td>
+<td style="text-align: right;">16578833.485</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Pakistan</td>
+<td style="text-align: right;">3712</td>
+<td style="text-align: right;">196</td>
+<td style="text-align: right;">500012.840</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Panama</td>
+<td style="text-align: right;">3527</td>
+<td style="text-align: right;">163</td>
+<td style="text-align: right;">676257.228</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Papua New Guinea</td>
+<td style="text-align: right;">1493</td>
+<td style="text-align: right;">129</td>
+<td style="text-align: right;">2518938.350</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Paraguay</td>
+<td style="text-align: right;">1847</td>
+<td style="text-align: right;">155</td>
+<td style="text-align: right;">1500246.163</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Peru</td>
+<td style="text-align: right;">3752</td>
+<td style="text-align: right;">184</td>
+<td style="text-align: right;">8385515.905</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Philippines</td>
+<td style="text-align: right;">3766</td>
+<td style="text-align: right;">211</td>
+<td style="text-align: right;">6237787.985</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Portugal</td>
+<td style="text-align: right;">4527</td>
+<td style="text-align: right;">210</td>
+<td style="text-align: right;">821529.837</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Qatar</td>
+<td style="text-align: right;">2914</td>
+<td style="text-align: right;">158</td>
+<td style="text-align: right;">6287407.830</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Romania</td>
+<td style="text-align: right;">4436</td>
+<td style="text-align: right;">198</td>
+<td style="text-align: right;">1643209.210</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Russian Federation</td>
+<td style="text-align: right;">4523</td>
+<td style="text-align: right;">200</td>
+<td style="text-align: right;">34246534.521</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Rwanda</td>
+<td style="text-align: right;">2405</td>
+<td style="text-align: right;">134</td>
+<td style="text-align: right;">468640.326</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Samoa</td>
+<td style="text-align: right;">980</td>
+<td style="text-align: right;">87</td>
+<td style="text-align: right;">2923.424</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Saudi Arabia</td>
+<td style="text-align: right;">3905</td>
+<td style="text-align: right;">190</td>
+<td style="text-align: right;">40174670.196</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Senegal</td>
+<td style="text-align: right;">2595</td>
+<td style="text-align: right;">168</td>
+<td style="text-align: right;">752735.139</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Seychelles</td>
+<td style="text-align: right;">1043</td>
+<td style="text-align: right;">132</td>
+<td style="text-align: right;">104195.580</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Sierra Leone</td>
+<td style="text-align: right;">1360</td>
+<td style="text-align: right;">143</td>
+<td style="text-align: right;">129263.090</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Singapore</td>
+<td style="text-align: right;">4455</td>
+<td style="text-align: right;">216</td>
+<td style="text-align: right;">23604748.580</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Somalia</td>
+<td style="text-align: right;">481</td>
+<td style="text-align: right;">95</td>
+<td style="text-align: right;">173862.501</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">South Africa</td>
+<td style="text-align: right;">4574</td>
+<td style="text-align: right;">215</td>
+<td style="text-align: right;">4023362.496</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Spain</td>
+<td style="text-align: right;">4595</td>
+<td style="text-align: right;">220</td>
+<td style="text-align: right;">3241798.317</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Sri Lanka</td>
+<td style="text-align: right;">3627</td>
+<td style="text-align: right;">202</td>
+<td style="text-align: right;">267326.760</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Sudan</td>
+<td style="text-align: right;">935</td>
+<td style="text-align: right;">137</td>
+<td style="text-align: right;">1166868.084</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Suriname</td>
+<td style="text-align: right;">1222</td>
+<td style="text-align: right;">139</td>
+<td style="text-align: right;">1087249.938</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Sweden</td>
+<td style="text-align: right;">4525</td>
+<td style="text-align: right;">218</td>
+<td style="text-align: right;">2161183.214</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Switzerland</td>
+<td style="text-align: right;">4473</td>
+<td style="text-align: right;">216</td>
+<td style="text-align: right;">13484113.491</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Thailand</td>
+<td style="text-align: right;">4494</td>
+<td style="text-align: right;">222</td>
+<td style="text-align: right;">6504256.707</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Togo</td>
+<td style="text-align: right;">1916</td>
+<td style="text-align: right;">123</td>
+<td style="text-align: right;">426064.684</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Tonga</td>
+<td style="text-align: right;">765</td>
+<td style="text-align: right;">68</td>
+<td style="text-align: right;">23930.958</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Trinidad and Tobago</td>
+<td style="text-align: right;">3094</td>
+<td style="text-align: right;">168</td>
+<td style="text-align: right;">837366.714</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Tunisia</td>
+<td style="text-align: right;">3315</td>
+<td style="text-align: right;">181</td>
+<td style="text-align: right;">681389.107</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Turkmenistan</td>
+<td style="text-align: right;">804</td>
+<td style="text-align: right;">102</td>
+<td style="text-align: right;">9555256.392</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Tuvalu</td>
+<td style="text-align: right;">179</td>
+<td style="text-align: right;">60</td>
+<td style="text-align: right;">9994.819</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Uganda</td>
+<td style="text-align: right;">2744</td>
+<td style="text-align: right;">164</td>
+<td style="text-align: right;">1713491.887</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Ukraine</td>
+<td style="text-align: right;">4068</td>
+<td style="text-align: right;">198</td>
+<td style="text-align: right;">1437498.937</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">United Arab Emirates</td>
+<td style="text-align: right;">4519</td>
+<td style="text-align: right;">211</td>
+<td style="text-align: right;">21853878.285</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">United Kingdom</td>
+<td style="text-align: right;">4617</td>
+<td style="text-align: right;">222</td>
+<td style="text-align: right;">8223608.986</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Uruguay</td>
+<td style="text-align: right;">2520</td>
+<td style="text-align: right;">172</td>
+<td style="text-align: right;">876144.125</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Vanuatu</td>
+<td style="text-align: right;">436</td>
+<td style="text-align: right;">74</td>
+<td style="text-align: right;">30506.205</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Zambia</td>
+<td style="text-align: right;">2679</td>
+<td style="text-align: right;">140</td>
+<td style="text-align: right;">2176891.675</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Zimbabwe</td>
+<td style="text-align: right;">1863</td>
+<td style="text-align: right;">134</td>
+<td style="text-align: right;">650559.875</td>
+<td style="text-align: right;">0.001</td>
 </tr>
 </tbody>
 </table>
@@ -394,21 +1289,11 @@ ul.task-list li input[type="checkbox"] {
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Data_Description_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
 <p><img src="Data_Description_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
-<p>What we can notice is that the more developped economies,ie the ones with the higher GDP per Capita tend to have a lower theil index in both imports and exports compared to countries with low level of GDP per capita so this suggests that trade diversification is positively correlated with a higher level of GDP per capita</p>
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -418,6 +1303,7 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 </div>
+<p>What we can notice is that the more developped economies,ie the ones with the higher GDP per Capita tend to have a lower theil index in both imports and exports compared to countries with low level of GDP per capita so this suggests that trade diversification is positively correlated with a higher level of GDP per capita</p>
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -427,9 +1313,24 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 </div>
-<section id="construction-of-gdp-growth" class="level3">
-<h3 class="anchored" data-anchor-id="construction-of-gdp-growth">Construction of GDP growth</h3>
-</section>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Data_Description_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Data_Description_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
 </section>
 
 </main>
