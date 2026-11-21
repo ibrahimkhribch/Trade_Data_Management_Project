@@ -116,15 +116,7 @@ WEO <- WEO |>
 
 WEO <- WEO |> 
   arrange(COUNTRY,Year) |>
-  mutate(
-    Growth_rate=(Real_GDP-lag(Real_GDP))/lag(Real_GDP)
-    )
-
-for (i in 2:nrow(WEO)) {
-  if (WEO[[i,1]]!= WEO[[i-1,1]]) {
-    WEO[i,11] <- NA
-  }
-}
+  mutate(Growth_rate=ifelse(COUNTRY==lag(COUNTRY), (Real_GDP-lag(Real_GDP))/lag(Real_GDP), NA))
 ```
 
 ## WEO
