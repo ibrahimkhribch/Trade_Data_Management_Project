@@ -110,9 +110,10 @@ WEO <- WEO |>
   #mutate(code = as.integer(code))
 ```
 
-### Construction of GDP growth
-
 ```{r}
+
+# Construction of GDP growth
+
 WEO <- WEO |> 
   arrange(COUNTRY,Year) |>
   mutate(
@@ -131,7 +132,7 @@ for (i in 2:nrow(WEO)) {
 `weo` was the original data set that we imported with `vroom`. We then removed the three first columns which corresponded to the data set, the series code and the type of measure since we didn't need them. The clean data set is stored in `WEO.`
 
 | Country | Indicator | Frequency | Scale | Year (1995-2025) |
-|---------|-----------|-----------|-------|-------------------|
+|---------|-----------|-----------|-------|------------------|
 
 Number of rows : `{r} nrow(WEO)`
 
@@ -157,8 +158,8 @@ un_trade_processed <- un_trade |>
 
 The original data set Merchandise Trade Annual contained unecssary information for our project so after havinf proceesed the data file we stored it in un_trade_processed The table format is as follows :
 
-| Year | Economy | Economy Label | Flow | Flow Label | Millions of US\$ at current prices | percentage of total world |
-|---------|-------------|-----------|---------|-----------|-------------|-----------|
+| Year | Economy | Economy Label | Flow | Flow Label | Millions of US\$ at current prices | Percentage of total world |
+|----------|-----------|-----------|-----------|-----------|-------------|-----------|
 
 Number of rows : `{r} nrow(un_trade_processed)`
 
@@ -172,7 +173,7 @@ un_trade_theil_processed <- un_trade_theil|>
 
 Similarly the theil index database had some columns that were not relevant to our project so after processing the database and storing it in un_trade_theil_processed The table format is as follows :
 
-| Year | Economy | Economy Label | Flow | Flow Label | Series | Series label | index |
+| Year | Economy | Economy Label | Flow | Flow Label | Series | Series label | Index |
 |------|---------|---------------|------|------------|--------|--------------|-------|
 
 Number of rows : `{r} nrow(un_trade_theil_processed)`
@@ -190,7 +191,7 @@ The BACII datasets use HS6 classification and these two files are the key to mat
 Each BACI file is composed as follows :
 
 | t   | i   | j   | k   | v   | q   |
-|------|------|------|------|------|------|
+|-----|-----|-----|-----|-----|-----|
 
 Number of rows :
 
@@ -222,7 +223,7 @@ https://www.cepii.fr/DATA_DOWNLOAD/baci/doc/baci_webpage.html
 
 Once the data downloaded and added the Rproj locally, we recommend removing the commented code lines using the BACII datasets aand rerendering this document.
 
-In the rest of the project before any code using the BACI datasets we will indicate which year file we are using so as to avoid having to load the 29 files. 
+In the rest of the project before any code using the BACI datasets we will indicate which year file we are using so as to avoid having to load the 29 files.
 
 ## Description of important variables
 
@@ -292,9 +293,7 @@ Since the WEO data set is already in cross country panel data form, we only need
 
 We proceed similarly for the un_trade_theil_index dataset.
 
-- BACII : 
-For this dataset we first start by matching the i, j and the product codes to the the two csvs containing these informations, once this step is done we simply join based on the country and year. 
-We note that give the subsetential number of datasets and observations of these datasets we will join the BACI datasets to the WEO progressively, meaning that as the project evolves and as our need for data for certain periods is necesary only then will we do these join operations, it is in our view a more sensible approach.
+- BACII : For this dataset we first start by matching the i, j and the product codes to the the two csvs containing these informations, once this step is done we simply join based on the country and year. We note that give the subsetential number of datasets and observations of these datasets we will join the BACI datasets to the WEO progressively, meaning that as the project evolves and as our need for data for certain periods is necesary only then will we do these join operations, it is in our view a more sensible approach.
 
 ```{r}
 theil_wide <- un_trade_theil_processed |>
@@ -474,6 +473,7 @@ data_macro_trade|>
   geom_point(alpha=0.2)+
   facet_wrap(~Year)
 ```
+
 ```{r}
 #GDP as a function of Trade openess before during and after the COVID pandemic crisis
 
@@ -483,6 +483,7 @@ trade_openess |>
   geom_point(alpha=0.5)+
   facet_wrap(~Year)
 ```
+
 ```{r}
 #evolution of real GDP_growth as a function of trade openness 
 trade_openess |>
@@ -491,4 +492,3 @@ trade_openess |>
   geom_point(alpha=0.5)+
   facet_wrap(~Year)
 ```
-
