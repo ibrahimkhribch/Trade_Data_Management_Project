@@ -18,27 +18,27 @@ theme_set(theme_bw())
 library(dplyr)
 ```
 
-## Link to the GitHub
+# Link to the GitHub
 
 https://github.com/ibrahimkhribch/Trade_Data_Management_Project
 
-## Data Source Description
+# Data Source Description
 
 First of all we would like to note that all the dataset that we are working with is public data and can be downloaded and used by anyone.
 
-### WEO-IMF
+## WEO-IMF
 
 Our first data set comes from the International Monetary fund (IMF). It is the World Economic Outlook (WEO) from October 2026. The data are calculated using hypothesis, notably on oil prices and interest rates. Some numerical values change with the evolution of the calculation methods, especially for countries with less qualitative data. The FMI uses national accounting , balance of payments statistics and public finances statistics which explains the difference of quality between countries input. The frame of reference may change between countries, possibly leading to different method of calculation. Therefore each value shouldn't be considered exact but a order of magnitude.
 
-### UN Trade and development
+## UN Trade and development
 
 The United Nations Trade and Development provides annual trade statistics and economical measures through their UNCTASstat database, we use two annual datasets from this source for our project : Merchandise Trade annual : this database provides a metric of the total amount of trade(imports and exports for each country, and they are expressed in US dollars Merchandise Theil indices- Annual : this dataset provides the theil indice measure which is a metric for the concentration of a country’s imports and exports with the trading partners, we have two indices one is for market concentration and the other is for product concentration.
 
-### Centre d’Études prospectives et d’informations internationales(CEPII)
+## Centre d’Études prospectives et d’informations internationales(CEPII)
 
 CEPII is a French research institution specializing in international economics. For our project we use their BACI database which provides annual trade information in an extensive and rigorous way, in fact the BACI provides bilateral data which also specifies the goods being traded. the values are calculated using UN Comtrade data, and the CEPII reconciles the data accounting for the many sources of differences between the reporting countries of the UN, the final data base is presented using HS6 classification. CEPII is a French research institution specializing in international economics. For our project we use their BACI database which provides annual trade information in an extensive and rigorous way, in fact the BACI provides bilateral data which also specifies the goods being traded. the values are calculated using UN Comtrade data, and the CEPII reconciles the data accounting for the many sources of differences between the reporting countries of the UN, the final data base is presented using HS6 classification.
 
-## Data sets Description table
+# Data sets Description table
 
 ```{r}
 #data import 
@@ -127,7 +127,7 @@ for (i in 2:nrow(WEO)) {
 }
 ```
 
-### WEO
+## WEO
 
 `weo` was the original data set that we imported with `vroom`. We then removed the three first columns which corresponded to the data set, the series code and the type of measure since we didn't need them. The clean data set is stored in `WEO.`
 
@@ -147,7 +147,7 @@ Number of rows : `{r} nrow(WEO_Constant_Price)`
 
 Number of columns : `{r} ncol(WEO_Constant_Price)`
 
-### UN Trade and development
+## UN Trade and development
 
 ```{r}
 un_trade_processed <- un_trade |> 
@@ -180,7 +180,7 @@ Number of rows : `{r} nrow(un_trade_theil_processed)`
 
 Number of columns : `{r} ncol(un_trade_theil_processed)`
 
-### CEPII BACI :
+## CEPII BACI :
 
 The CEPII BACI database being too big to push into our repository, below is the link to download the datafile we will use for our project : https://www.cepii.fr/cepii/en/bdd_modele/bdd_modele_item.asp?id=37
 
@@ -225,19 +225,19 @@ Once the data downloaded and added the Rproj locally, we recommend removing the 
 
 In the rest of the project before any code using the BACI datasets we will indicate which year file we are using so as to avoid having to load the 29 files.
 
-## Description of important variables
+# Description of important variables
 
-### WEO
+## WEO
 
 The first important variable from the WEO is the Gross domestic production (GDP) (in Billions of US dollars). It measures the production of a country. It will be the base of our analysis through output we can infer from it. The GDP in constant price (in Billions of domestic currency) will help us calculate the growth rate of the GDP. The Population (in millions) can help us measure the importance of the number of people while GDP per capita (in Billions of US dollars) the importance of the welfare of the inhabitants. The current account balance (in percent of GDP) helps us understand if the country is a lender or a borrower and in which proportion The gross debt (in percent of GDP) allows us to understand to what extent a country is indebted. The gross national savings (in percent of GDP) represent the part of the GDP that is not consumed. Finally the unemployment rate (in percent) measures the part of the population that is unemployed. All those variables can either explain the effect of an international shock on an economy.
 
-### UN Trade and development
+## UN Trade and development
 
-# UN Trade data:
+### UN Trade data:
 
 From this database we found that the foloowing variables were the most important for the rest of our project : - The trade quantity assosciated with each flow label either imports or exports - the percentage of the world trade that the flow label trade quantity of each corresponding country represents these variables will serve as the frist explonatory variables as well as the bricks to constructing some aggregat variables that we will explore all along the project such as the trade quantity contraction after a crisis as well as other aggregates like trade openess.
 
-# UN theil index data:
+### UN theil index data:
 
 This database covers essentially the theil index but it is important to note that the following categories of theil index will be used each for a different purpose : for Imports : - Overall Theil Index
 
@@ -251,7 +251,7 @@ for Exports : - Overall Theil Index
 
 - Market (per product) concentration Theil index
 
-# CEPII BACI :
+## CEPII BACI :
 
 The most important variables that we will use from this dataset are : - Product category
 
@@ -261,7 +261,7 @@ The most important variables that we will use from this dataset are : - Product 
 
 These variables will be necessary for the constrution of aggregate indicators such as the dependence of a country on its trading partners or even it's exposure to foreign economic shocks.
 
-## Research question description
+# Research question description
 
 The main goal of our project is to study the following economical question:
 
@@ -281,7 +281,7 @@ In a first step we will focus on the following two crises :
 
 - COVID 19 pandemic crisis
 
-## Merging the datasets
+# Merging the datasets
 
 To merge the data sets we proceed as follows. :
 
