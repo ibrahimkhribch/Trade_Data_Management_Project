@@ -73,33 +73,30 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="link-to-the-github" class="level2">
-<h2 class="anchored" data-anchor-id="link-to-the-github">Link to the GitHub</h2>
+<section id="link-to-the-github" class="level1">
+<h1>Link to the GitHub</h1>
 <p>https://github.com/ibrahimkhribch/Trade_Data_Management_Project</p>
 </section>
-<section id="data-source-description" class="level2">
-<h2 class="anchored" data-anchor-id="data-source-description">Data Source Description</h2>
+<section id="data-source-description" class="level1">
+<h1>Data Source Description</h1>
 <p>First of all we would like to note that all the dataset that we are working with is public data and can be downloaded and used by anyone.</p>
-<section id="weo-imf" class="level3">
-<h3 class="anchored" data-anchor-id="weo-imf">WEO-IMF</h3>
+<section id="weo-imf" class="level2">
+<h2 class="anchored" data-anchor-id="weo-imf">WEO-IMF</h2>
 <p>Our first data set comes from the International Monetary fund (IMF). It is the World Economic Outlook (WEO) from October 2026. The data are calculated using hypothesis, notably on oil prices and interest rates. Some numerical values change with the evolution of the calculation methods, especially for countries with less qualitative data. The FMI uses national accounting , balance of payments statistics and public finances statistics which explains the difference of quality between countries input. The frame of reference may change between countries, possibly leading to different method of calculation. Therefore each value shouldn’t be considered exact but a order of magnitude.</p>
 </section>
-<section id="un-trade-and-development" class="level3">
-<h3 class="anchored" data-anchor-id="un-trade-and-development">UN Trade and development</h3>
+<section id="un-trade-and-development" class="level2">
+<h2 class="anchored" data-anchor-id="un-trade-and-development">UN Trade and development</h2>
 <p>The United Nations Trade and Development provides annual trade statistics and economical measures through their UNCTASstat database, we use two annual datasets from this source for our project : Merchandise Trade annual : this database provides a metric of the total amount of trade(imports and exports for each country, and they are expressed in US dollars Merchandise Theil indices- Annual : this dataset provides the theil indice measure which is a metric for the concentration of a country’s imports and exports with the trading partners, we have two indices one is for market concentration and the other is for product concentration.</p>
 </section>
-<section id="centre-détudes-prospectives-et-dinformations-internationalescepii" class="level3">
-<h3 class="anchored" data-anchor-id="centre-détudes-prospectives-et-dinformations-internationalescepii">Centre d’Études prospectives et d’informations internationales(CEPII)</h3>
+<section id="centre-détudes-prospectives-et-dinformations-internationalescepii" class="level2">
+<h2 class="anchored" data-anchor-id="centre-détudes-prospectives-et-dinformations-internationalescepii">Centre d’Études prospectives et d’informations internationales(CEPII)</h2>
 <p>CEPII is a French research institution specializing in international economics. For our project we use their BACI database which provides annual trade information in an extensive and rigorous way, in fact the BACI provides bilateral data which also specifies the goods being traded. the values are calculated using UN Comtrade data, and the CEPII reconciles the data accounting for the many sources of differences between the reporting countries of the UN, the final data base is presented using HS6 classification. CEPII is a French research institution specializing in international economics. For our project we use their BACI database which provides annual trade information in an extensive and rigorous way, in fact the BACI provides bilateral data which also specifies the goods being traded. the values are calculated using UN Comtrade data, and the CEPII reconciles the data accounting for the many sources of differences between the reporting countries of the UN, the final data base is presented using HS6 classification.</p>
 </section>
 </section>
-<section id="data-sets-description-table" class="level2">
-<h2 class="anchored" data-anchor-id="data-sets-description-table">Data sets Description table</h2>
-<section id="construction-of-gdp-growth" class="level3">
-<h3 class="anchored" data-anchor-id="construction-of-gdp-growth">Construction of GDP growth</h3>
-</section>
-<section id="weo" class="level3">
-<h3 class="anchored" data-anchor-id="weo">WEO</h3>
+<section id="data-sets-description-table" class="level1">
+<h1>Data sets Description table</h1>
+<section id="weo" class="level2">
+<h2 class="anchored" data-anchor-id="weo">WEO</h2>
 <p><code>weo</code> was the original data set that we imported with <code>vroom</code>. We then removed the three first columns which corresponded to the data set, the series code and the type of measure since we didn’t need them. The clean data set is stored in <code>WEO.</code></p>
 <table class="caption-top">
 <thead>
@@ -133,15 +130,15 @@ ul.task-list li input[type="checkbox"] {
 <p>Number of rows : 6076</p>
 <p>Number of columns : 3</p>
 </section>
-<section id="un-trade-and-development-1" class="level3">
-<h3 class="anchored" data-anchor-id="un-trade-and-development-1">UN Trade and development</h3>
+<section id="un-trade-and-development-1" class="level2">
+<h2 class="anchored" data-anchor-id="un-trade-and-development-1">UN Trade and development</h2>
 <p>The original data set Merchandise Trade Annual contained unecssary information for our project so after havinf proceesed the data file we stored it in un_trade_processed The table format is as follows :</p>
-<table class="caption-top" style="width:100%;">
+<table class="caption-top">
 <colgroup>
-<col style="width: 11%">
-<col style="width: 16%">
+<col style="width: 12%">
 <col style="width: 14%">
-<col style="width: 11%">
+<col style="width: 14%">
+<col style="width: 14%">
 <col style="width: 14%">
 <col style="width: 16%">
 <col style="width: 14%">
@@ -154,7 +151,7 @@ ul.task-list li input[type="checkbox"] {
 <th>Flow</th>
 <th>Flow Label</th>
 <th>Millions of US$ at current prices</th>
-<th>percentage of total world</th>
+<th>Percentage of total world</th>
 </tr>
 </thead>
 <tbody>
@@ -183,7 +180,7 @@ ul.task-list li input[type="checkbox"] {
 <th>Flow Label</th>
 <th>Series</th>
 <th>Series label</th>
-<th>index</th>
+<th>Index</th>
 </tr>
 </thead>
 <tbody>
@@ -192,8 +189,8 @@ ul.task-list li input[type="checkbox"] {
 <p>Number of rows : 55290</p>
 <p>Number of columns : 8</p>
 </section>
-<section id="cepii-baci" class="level3">
-<h3 class="anchored" data-anchor-id="cepii-baci">CEPII BACI :</h3>
+<section id="cepii-baci" class="level2">
+<h2 class="anchored" data-anchor-id="cepii-baci">CEPII BACI :</h2>
 <p>The CEPII BACI database being too big to push into our repository, below is the link to download the datafile we will use for our project : https://www.cepii.fr/cepii/en/bdd_modele/bdd_modele_item.asp?id=37</p>
 <p>Note that we use the HS92 (1995-2024) datafile. Once the file downloaded, inside is the trade data file from 1995 to 2024 plus two additional files : -country_codes_V202601.csv -product_codes_HS92_V2026.csv these two files are already loaded into our repository.</p>
 <p>The BACII datasets use HS6 classification and these two files are the key to matching the datasets with our UN and IMF data.</p>
@@ -228,22 +225,20 @@ ul.task-list li input[type="checkbox"] {
 <p>In the rest of the project before any code using the BACI datasets we will indicate which year file we are using so as to avoid having to load the 29 files.</p>
 </section>
 </section>
-<section id="description-of-important-variables" class="level2">
-<h2 class="anchored" data-anchor-id="description-of-important-variables">Description of important variables</h2>
-<section id="weo-1" class="level3">
-<h3 class="anchored" data-anchor-id="weo-1">WEO</h3>
+<section id="description-of-important-variables" class="level1">
+<h1>Description of important variables</h1>
+<section id="weo-1" class="level2">
+<h2 class="anchored" data-anchor-id="weo-1">WEO</h2>
 <p>The first important variable from the WEO is the Gross domestic production (GDP) (in Billions of US dollars). It measures the production of a country. It will be the base of our analysis through output we can infer from it. The GDP in constant price (in Billions of domestic currency) will help us calculate the growth rate of the GDP. The Population (in millions) can help us measure the importance of the number of people while GDP per capita (in Billions of US dollars) the importance of the welfare of the inhabitants. The current account balance (in percent of GDP) helps us understand if the country is a lender or a borrower and in which proportion The gross debt (in percent of GDP) allows us to understand to what extent a country is indebted. The gross national savings (in percent of GDP) represent the part of the GDP that is not consumed. Finally the unemployment rate (in percent) measures the part of the population that is unemployed. All those variables can either explain the effect of an international shock on an economy.</p>
 </section>
-<section id="un-trade-and-development-2" class="level3">
-<h3 class="anchored" data-anchor-id="un-trade-and-development-2">UN Trade and development</h3>
-</section>
-</section>
-<section id="un-trade-data" class="level1">
-<h1>UN Trade data:</h1>
+<section id="un-trade-and-development-2" class="level2">
+<h2 class="anchored" data-anchor-id="un-trade-and-development-2">UN Trade and development</h2>
+<section id="un-trade-data" class="level3">
+<h3 class="anchored" data-anchor-id="un-trade-data">UN Trade data:</h3>
 <p>From this database we found that the foloowing variables were the most important for the rest of our project : - The trade quantity assosciated with each flow label either imports or exports - the percentage of the world trade that the flow label trade quantity of each corresponding country represents these variables will serve as the frist explonatory variables as well as the bricks to constructing some aggregat variables that we will explore all along the project such as the trade quantity contraction after a crisis as well as other aggregates like trade openess.</p>
 </section>
-<section id="un-theil-index-data" class="level1">
-<h1>UN theil index data:</h1>
+<section id="un-theil-index-data" class="level3">
+<h3 class="anchored" data-anchor-id="un-theil-index-data">UN theil index data:</h3>
 <p>This database covers essentially the theil index but it is important to note that the following categories of theil index will be used each for a different purpose : for Imports : - Overall Theil Index</p>
 <ul>
 <li><p>Product concentration Theil index</p></li>
@@ -255,16 +250,19 @@ ul.task-list li input[type="checkbox"] {
 <li><p>Market (per product) concentration Theil index</p></li>
 </ul>
 </section>
-<section id="cepii-baci-1" class="level1">
-<h1>CEPII BACI :</h1>
+</section>
+<section id="cepii-baci-1" class="level2">
+<h2 class="anchored" data-anchor-id="cepii-baci-1">CEPII BACI :</h2>
 <p>The most important variables that we will use from this dataset are : - Product category</p>
 <ul>
 <li><p>Value of the trade flow</p></li>
 <li><p>the importing and exporting countries</p></li>
 </ul>
 <p>These variables will be necessary for the constrution of aggregate indicators such as the dependence of a country on its trading partners or even it’s exposure to foreign economic shocks.</p>
-<section id="research-question-description" class="level2">
-<h2 class="anchored" data-anchor-id="research-question-description">Research question description</h2>
+</section>
+</section>
+<section id="research-question-description" class="level1">
+<h1>Research question description</h1>
 <p>The main goal of our project is to study the following economical question:</p>
 <p><strong>How does international trade and international openness affect a country’s resilience to a global crisis ?</strong></p>
 <p>We will focus on both developing and advanced economies and our goal is to understand what characteristics make some countries more “ resilient “ than others. We will try and determine indicators using R that can give better insight into the way each economy responds to crises.</p>
@@ -277,8 +275,8 @@ ul.task-list li input[type="checkbox"] {
 <li><p>COVID 19 pandemic crisis</p></li>
 </ul>
 </section>
-<section id="merging-the-datasets" class="level2">
-<h2 class="anchored" data-anchor-id="merging-the-datasets">Merging the datasets</h2>
+<section id="merging-the-datasets" class="level1">
+<h1>Merging the datasets</h1>
 <p>To merge the data sets we proceed as follows. :</p>
 <ul>
 <li>WEO + un_trade data :</li>
@@ -291,7 +289,6 @@ ul.task-list li input[type="checkbox"] {
 <ul>
 <li>BACII : For this dataset we first start by matching the i, j and the product codes to the the two csvs containing these informations, once this step is done we simply join based on the country and year. We note that give the subsetential number of datasets and observations of these datasets we will join the BACI datasets to the WEO progressively, meaning that as the project evolves and as our need for data for certain periods is necesary only then will we do these join operations, it is in our view a more sensible approach.</li>
 </ul>
-</section>
 </section>
 <section id="summary-statistics" class="level1">
 <h1>Summary Statistics</h1>
@@ -383,6 +380,10 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="some-plots-that-motivates-our-research-question" class="level1">
 <h1>Some plots that motivates our research question</h1>
+<div class="columns">
+<div class="column" style="width:50%;">
+<section id="gdp-per-capita-as-a-function-of-exports-theil-index-before-during-and-after-the-covid-pandemic-crisis" class="level3">
+<h3 class="anchored" data-anchor-id="gdp-per-capita-as-a-function-of-exports-theil-index-before-during-and-after-the-covid-pandemic-crisis">GDP per capita as a function of Exports theil index before during and after the COVID pandemic crisis</h3>
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -392,6 +393,10 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 </div>
+</section>
+</div><div class="column" style="width:50%;">
+<section id="gdp-per-capita-as-a-function-of-imports-theil-index-before-during-and-after-the-covid-pandemic-crisis" class="level3">
+<h3 class="anchored" data-anchor-id="gdp-per-capita-as-a-function-of-imports-theil-index-before-during-and-after-the-covid-pandemic-crisis">GDP per capita as a function of Imports theil index before during and after the COVID pandemic crisis</h3>
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -401,7 +406,12 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 </div>
-<p>What we can notice is that the more developped economies,ie the ones with the higher GDP per Capita tend to have a lower theil index in both imports and exports compared to countries with low level of GDP per capita so this suggests that trade diversification is positively correlated with a higher level of GDP per capita</p>
+</section>
+</div>
+</div>
+<p>What we can notice is that the more developped economies,i.e.&nbsp;the ones with the higher GDP per Capita tend to have a lower theil index in both imports and exports compared to countries with low level of GDP per capita so this suggests that trade diversification is positively correlated with a higher level of GDP per capita.</p>
+<section id="gdp-per-capita-as-a-function-of-the-quantity-exports-trade-before-during-and-after-the-covid-pandemic-crisis" class="level3">
+<h3 class="anchored" data-anchor-id="gdp-per-capita-as-a-function-of-the-quantity-exports-trade-before-during-and-after-the-covid-pandemic-crisis">GDP per capita as a function of the quantity exports trade before during and after the COVID pandemic crisis</h3>
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -411,6 +421,10 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 </div>
+<p>On this group of graphics, we can realize that the GDP per capita in a country is positively correlated to the quantity exported by that country. This relation looks resistant to crises, as the three graphics have a similar disposition of points.</p>
+</section>
+<section id="gdp-as-a-function-of-trade-openess-before-during-and-after-the-covid-pandemic-crisis" class="level3">
+<h3 class="anchored" data-anchor-id="gdp-as-a-function-of-trade-openess-before-during-and-after-the-covid-pandemic-crisis">GDP as a function of Trade openess before during and after the COVID pandemic crisis</h3>
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -420,6 +434,10 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 </div>
+<p>These graphics, we denote that the higher the GDP per capita of country is, the higher the share of importation and exportation is. Once again, the COVID pandemic didn’t affect much the disposition from 2019 to 2021.</p>
+</section>
+<section id="evolution-of-real-gdp-growth-as-a-function-of-trade-openness" class="level3">
+<h3 class="anchored" data-anchor-id="evolution-of-real-gdp-growth-as-a-function-of-trade-openness">Evolution of real GDP growth as a function of trade openness</h3>
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -429,6 +447,8 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 </div>
+<p>These graphics show that before the pandemic, world openess of a country didn’t affect it’s growth rate that much. However the crisis affected the growth rate of countries with lower openess more. In shape in 2021, can be explained by a catch-up effect due to the growth rate the year prior.</p>
+</section>
 </section>
 
 </main>
