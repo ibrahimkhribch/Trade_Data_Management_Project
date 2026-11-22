@@ -452,7 +452,7 @@ knitr::kable()
     #n_partners = n_distinct(Importer),
     #max_trade_value = max(v),
     #min_trade_value = min(v)
-  )|>
+  #)|>
   #slice_sample(n=6)|>
 #knitr::kable()
 
