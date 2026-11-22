@@ -22,6 +22,29 @@ library(dplyr)
 
 https://github.com/ibrahimkhribch/Trade_Data_Management_Project
 
+# Research question description
+
+The main goal of our project is to study the following economical question:
+
+**How does international trade and international openness affect a country’s resilience to a global crisis ?**
+
+We will focus on both developing and advanced economies and our goal is to understand what characteristics make some countries more “ resilient “ than others. We will try and determine indicators using R that can give better insight into the way each economy responds to crises.
+
+What motivates our project is the observation of the constant rise of globalization and the increasing link between countries, ever since the Second World War.
+
+Nowadays, importation and exportation are essential in most economies around the world. As beneficial as globalization has been, it also came with some issues. Countries have less control on their economies, as the outside world's influence on prices inside the borders soar. Increase in tariff prices, pandemic (such as COVID-19) and geopolitical instability (such in the strait of Hormuz) affect economies all around the globe. However, we can notice that similar countries can have different reactions to a crisis. Some take years to recover while others hardly struggle. Our objective is to understand these differences through analyses on both variables describing the economy of the countries as well as data representing their international places (number of goods imported/exported, how many countries are traded with).
+
+This analysis will help us understand which place a country should aim to have in the world to have a growing economy, while keeping autonomy when facing a crisis.
+
+As a first step we will focus on the following two crises :
+
+- 2008 sub-prime financial crisis
+
+- COVID 19 pandemic crisis
+
+Using the data we collected we will construct aggregate indicators, for example the time it takes a country to reach the same level of GDP pre crisis, and these indicators will be our guide to understanding the differences mentionned above. 
+
+
 # Data Source Description
 
 First of all we would like to note that all the dataset that we are working with is public data and can be downloaded and used by anyone.
@@ -155,7 +178,9 @@ The original data set Merchandise Trade Annual contained unecssary information f
 
 Number of rows : `{r} nrow(un_trade_processed)`
 
-Number of columns : \| `{r} ncol(un_trade_processed)`
+Number of columns : `{r} ncol(un_trade_processed)`
+
+where flow label is either Imports or exports and Flow is either 01 for Imports and 02 for Exports
 
 ```{r}
 un_trade_theil_processed <- un_trade_theil|>
@@ -174,16 +199,24 @@ Number of columns : `{r} ncol(un_trade_theil_processed)`
 
 ## CEPII BACI :
 
-The CEPII BACI database being too big to push into our repository, below is the link to download the datafile we will use for our project : https://www.cepii.fr/cepii/en/bdd_modele/bdd_modele_item.asp?id=37
+The CEPII BACI database being too big to push into our repository, below is the link to download the datafile we will use for our project :
 
-Note that we use the HS92 (1995-2024) datafile. Once the file downloaded, inside is the trade data file from 1995 to 2024 plus two additional files : -country_codes_V202601.csv -product_codes_HS92_V2026.csv these two files are already loaded into our repository.
+https://www.cepii.fr/cepii/en/bdd_modele/bdd_modele_item.asp?id=37
+
+Note that we use the HS92 (1995-2024) datafile. Once the file downloaded, inside is the trade data file from 1995 to 2024 plus two additional files : 
+
+-country_codes_V202601.csv
+
+-product_codes_HS92_V2026.csv 
+
+these two files are already loaded into our repository.
 
 The BACII datasets use HS6 classification and these two files are the key to matching the datasets with our UN and IMF data.
 
 Each BACI file is composed as follows :
 
-| t   | i   | j   | k   | v   | q   |
-|-----|-----|-----|-----|-----|-----|
+| t       |      i    |      j   |     k   |     v   |     q   |
+|-----| -----|-----|-----|-----|-----|
 
 Number of rows :
 
@@ -197,7 +230,9 @@ Number of columns :
 #ncol(BACI_2019)
 ```
 
-where : - t represents Year
+where : 
+
+- t represents Year
 
 - i represents Exporter
 
@@ -213,7 +248,7 @@ for a more detailed description of the methodology of this encoding we refer the
 
 https://www.cepii.fr/DATA_DOWNLOAD/baci/doc/baci_webpage.html
 
-Once the data downloaded and added the Rproj locally, we recommend removing the commented code lines using the BACII datasets aand rerendering this document.
+Once the data downloaded and added the Rproj locally, we recommend removing the commented code lines using the BACII datasets and rerendering this document.
 
 In the rest of the project before any code using the BACI datasets we will indicate which year file we are using so as to avoid having to load the 29 files.
 
@@ -231,13 +266,17 @@ From this database we found that the foloowing variables were the most important
 
 ### UN theil index data:
 
-This database covers essentially the theil index but it is important to note that the following categories of theil index will be used each for a different purpose : for Imports : - Overall Theil Index
+This database covers essentially the theil index but it is important to note that the following categories of theil index will be used each for a different purpose : for Imports : 
+
+- Overall Theil Index
 
 - Product concentration Theil index
 
 - Market (per product) concentration Theil index
 
-for Exports : - Overall Theil Index
+for Exports : 
+
+- Overall Theil Index
 
 - Product concentration Theil index
 
@@ -245,7 +284,9 @@ for Exports : - Overall Theil Index
 
 ## CEPII BACI :
 
-The most important variables that we will use from this dataset are : - Product category
+The most important variables that we will use from this dataset are :
+
+- Product category
 
 - Value of the trade flow
 
@@ -253,25 +294,6 @@ The most important variables that we will use from this dataset are : - Product 
 
 These variables will be necessary for the constrution of aggregate indicators such as the dependence of a country on its trading partners or even it's exposure to foreign economic shocks.
 
-# Research question description
-
-The main goal of our project is to study the following economical question:
-
-**How does international trade and international openness affect a country’s resilience to a global crisis ?**
-
-We will focus on both developing and advanced economies and our goal is to understand what characteristics make some countries more “ resilient “ than others. We will try and determine indicators using R that can give better insight into the way each economy responds to crises.
-
-What motivates our project is the observation of the constant rise of globalization and the increasing link between countries, ever since the Second World War.
-
-Nowadays, importation and exportation are essential in most economies around the world. As beneficial as globalization has been, it also came with some issues. Countries have less control on their economies, as the outside world's influence on prices inside the borders soar. Increase in tariff prices, pandemic (such as COVID-19) and geopolitical instability (such in the strait of Hormuz) affect economies all around the globe. However, we can notice that similar countries can have different reactions to a crisis. Some take years to recover while others hardly struggle. Our objective is to understand these differences through analyses on both variables describing the economy of the countries as well as data representing their international places (number of goods imported/exported, how many countries are traded with).
-
-This analysis will help us understand which place a country should aim to have in the world to have a growing economy, while keeping autonomy when facing a crisis.
-
-In a first step we will focus on the following two crises :
-
-- 2008 sub-prime financial crisis
-
-- COVID 19 pandemic crisis
 
 # Merging the datasets
 
@@ -285,7 +307,9 @@ Since the WEO data set is already in cross country panel data form, we only need
 
 We proceed similarly for the un_trade_theil_index dataset.
 
-- BACII : For this dataset we first start by matching the i, j and the product codes to the the two csvs containing these informations, once this step is done we simply join based on the country and year. We note that give the subsetential number of datasets and observations of these datasets we will join the BACI datasets to the WEO progressively, meaning that as the project evolves and as our need for data for certain periods is necesary only then will we do these join operations, it is in our view a more sensible approach.
+- BACII :
+
+For this dataset we first start by matching the i, j and the product codes to the the two csv files  containing these information, once this step is done we simply join based on the country and year. We note that given the substantial number of datasets and observations of these datasets we will join the BACI datasets to the WEO progressively, meaning that as the project evolves and as our need for data for certain periods is necessary only then will we do these join operations, it is in our view a more sensible approach.
 
 ```{r}
 theil_wide <- un_trade_theil_processed |>
@@ -346,6 +370,7 @@ data_macro_trade <- WEO |>
   #select(t,Exporter,Importer,k,v,q)|>
   #rename(Year=t)
 #we bind the datasets to create a synthetic dataset of pre-covid, during covis and post covid
+
 #BACI_covid <- 
   #bind_rows(
     #BACI_2019,
@@ -415,7 +440,7 @@ knitr::kable()
 
 #data_weo_baci_2019 |>
   #summarise(
-    #n_countries_BACI_pre = n_distinct(COUNTRY)
+   # n_countries_BACI = n_distinct(COUNTRY)
   #)|>
   #knitr::kable()
   
@@ -423,11 +448,11 @@ knitr::kable()
 #data_weo_baci_2019 |>
  #group_by(COUNTRY)|>
   #summarise(
-    #n_product = n_distinct(k),
+   # n_product = n_distinct(k),
     #n_partners = n_distinct(Importer),
     #max_trade_value = max(v),
     #min_trade_value = min(v)
-  #)|>
+  )|>
   #slice_sample(n=6)|>
 #knitr::kable()
 
@@ -476,7 +501,7 @@ What we can notice is that the more developped economies,i.e. the ones with the 
 data_macro_trade|>
   filter(Year%in%c(2019,2020,2021) )|>
   filter(!is.na(`Gross domestic product (GDP), Current prices, Per capita, US dollar`)&!is.na(Trade_quantity_Exports))|>
-  ggplot(aes(x=`Gross domestic product (GDP), Current prices, Per capita, US dollar` ,y=Trade_quantity_Exports))+
+  ggplot(aes(x=`Gross domestic product (GDP), Current prices, Per capita, US dollar` ,y=Trade_quantity_Exports,color=factor(Year)))+
   geom_point(alpha=0.2)+
   facet_wrap(~Year) +
   scale_x_continuous(trans = 'log10') +
@@ -494,7 +519,7 @@ trade_openess |>
   geom_point(alpha=0.5)+
   facet_wrap(~Year)
 ```
-These graphics, we denote that the higher the GDP per capita of country is, the higher the share of importation and exportation is. Once again, the COVID pandemic didn't affect much the disposition from 2019 to 2021.
+In these graphics, we denote that the higher the GDP per capita of country is, the higher the share of importation and exportation is. Once again, the COVID pandemic didn't affect much the disposition from 2019 to 2021.
 
 
 ### Evolution of real GDP growth as a function of trade openness 
@@ -506,5 +531,5 @@ trade_openess |>
   geom_point(alpha=0.5)+
   facet_wrap(~Year)
 ```
-These graphics show that before the pandemic, world openess of a country didn't affect it's growth rate that much. However the crisis affected the growth rate of countries with lower openess more. In shape in 2021, can be explained by a catch-up effect due to the growth rate the year prior. 
+These graphics show that before the pandemic, trade openess of a country didn't affect it's growth rate that much. However the crisis affected the growth rate of countries with lower openess more. In shape in 2021, can be explained by a catch-up effect due to the growth rate the year prior. 
 
